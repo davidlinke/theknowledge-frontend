@@ -194,7 +194,7 @@ class App extends React.Component {
 				{this.state.createQuiz && (
 					<button onClick={this.hideCreateQuiz}>Cancel Create Quiz</button>
 				)}
-				{this.state.createQuiz && <CreateQuiz />}
+				{this.state.createQuiz && <CreateQuiz baseURL={baseURL} />}
 			</div>
 		);
 	}
