@@ -3,19 +3,11 @@ import React from 'react';
 class CreateQuizQuestion extends React.Component {
 	constructor(props) {
 		super(props);
-		// this.state = {
-		// 	question: '',
-		// 	answer1: '',
-		// 	answer1img: '',
-		// 	answer1result: ''
-		// };
 		this.handleChange = this.handleChange.bind(this);
 		this.resultOptionsDropdown = this.resultOptionsDropdown.bind(this);
 	}
 
 	handleChange(event, index) {
-		// this.setState({ [event.currentTarget.id]: event.currentTarget.value });
-		// this.props.onChange(event);
 		this.props.onChange(event, index);
 	}
 

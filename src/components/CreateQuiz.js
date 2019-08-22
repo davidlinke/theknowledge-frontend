@@ -1,6 +1,7 @@
 import React from 'react';
 import CreateQuizQuestion from './CreateQuizQuestion.js';
 import CreateQuizResult from './CreateQuizResult.js';
+import axios from 'axios';
 
 class CreateQuiz extends React.Component {
 	constructor(props) {
@@ -26,6 +27,23 @@ class CreateQuiz extends React.Component {
 		this.getResultOptions = this.getResultOptions.bind(this);
 		this.removeQuestion = this.removeQuestion.bind(this);
 		this.removeResult = this.removeResult.bind(this);
+	}
+
+	async handleSubmit(event) {
+		event.preventDefault();
+
+		const response = await axios.post(`${this.props.baseURL}/quizzes`, {
+			name: this.state.quizName,
+			caption: this.state.quizCaption,
+			image: this.state.quizImage,
+			questions: this.state.questions,
+			results: this.state.results
+		});
+
+		console.log('CREATE QUIZ RESPONSE BELOW');
+		console.log(response);
+
+		this.setState({});
 	}
 
 	handleChange(event) {
@@ -59,10 +77,6 @@ class CreateQuiz extends React.Component {
 			results: array
 		});
 		this.getResultOptions();
-	}
-
-	async handleSubmit(event) {
-		event.preventDefault();
 	}
 
 	showQuestions = () => {
