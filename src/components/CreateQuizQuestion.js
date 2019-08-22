@@ -16,7 +16,7 @@ class CreateQuizQuestion extends React.Component {
 		const results = [];
 
 		results.push(
-			<option value={0} key={'resultdefault'}>
+			<option value='' disabled key={'resultdefault'}>
 				Select a Result
 			</option>
 		);
@@ -44,6 +44,7 @@ class CreateQuizQuestion extends React.Component {
 					onChange={event =>
 						this.handleChange(event, this.props.questionNumber)
 					}
+					required
 				/>
 				<h4>Answer 1</h4>
 				<input
@@ -54,6 +55,7 @@ class CreateQuizQuestion extends React.Component {
 					onChange={event =>
 						this.handleChange(event, this.props.questionNumber)
 					}
+					required
 				/>
 				<input
 					type='text'
@@ -70,6 +72,8 @@ class CreateQuizQuestion extends React.Component {
 					onChange={event =>
 						this.handleChange(event, this.props.questionNumber)
 					}
+					required
+					defaultValue=''
 				>
 					{this.resultOptionsDropdown()}
 				</select>
@@ -79,6 +83,7 @@ class CreateQuizQuestion extends React.Component {
 					id='answer2'
 					name='answer2'
 					placeholder='Answer 2'
+					required
 					onChange={event =>
 						this.handleChange(event, this.props.questionNumber)
 					}
@@ -98,6 +103,8 @@ class CreateQuizQuestion extends React.Component {
 					onChange={event =>
 						this.handleChange(event, this.props.questionNumber)
 					}
+					required
+					defaultValue=''
 				>
 					{this.resultOptionsDropdown()}
 				</select>
@@ -107,6 +114,7 @@ class CreateQuizQuestion extends React.Component {
 					id='answer3'
 					name='answer3'
 					placeholder='Answer 3'
+					required
 					onChange={event =>
 						this.handleChange(event, this.props.questionNumber)
 					}
@@ -126,6 +134,8 @@ class CreateQuizQuestion extends React.Component {
 					onChange={event =>
 						this.handleChange(event, this.props.questionNumber)
 					}
+					required
+					defaultValue=''
 				>
 					{this.resultOptionsDropdown()}
 				</select>
@@ -135,6 +145,7 @@ class CreateQuizQuestion extends React.Component {
 					id='answer4'
 					name='answer4'
 					placeholder='Answer 4'
+					required
 					onChange={event =>
 						this.handleChange(event, this.props.questionNumber)
 					}
@@ -154,6 +165,8 @@ class CreateQuizQuestion extends React.Component {
 					onChange={event =>
 						this.handleChange(event, this.props.questionNumber)
 					}
+					required
+					defaultValue=''
 				>
 					{this.resultOptionsDropdown()}
 				</select>
