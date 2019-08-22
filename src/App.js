@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import CreateQuiz from './components/CreateQuiz';
+import ShowAllQuizzes from './components/ShowAllQuizzes';
 axios.defaults.withCredentials = true;
 
 const baseURL = 'http://localhost:3003';
@@ -107,27 +108,66 @@ class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>The Knowledge</h1>
-				{this.state.currentUser !== null ? (
-					<button onClick={this.handleLogOut}>Log Out</button>
-				) : (
-					<>
-						<button onClick={() => this.openModal('create')}>
-							Create Account
-						</button>
-						<button onClick={() => this.openModal('login')}>Log In</button>
-					</>
-				)}
+				<div className='header'>
+					<a href='/'>
+						<h1>The Knowledge</h1>
+					</a>
+					<div className='account'>
+						{this.state.currentUser && (
+							<>
+								{/* <p>Current User: {this.state.currentUser}</p> */}
+								{!this.state.createQuiz && (
+									<button
+										className='headerButton'
+										onClick={this.showCreateQuiz}
+									>
+										Create Quiz
+									</button>
+								)}
+							</>
+						)}
+						{this.state.createQuiz && (
+							<button className='headerButton' onClick={this.hideCreateQuiz}>
+								Cancel Create Quiz
+							</button>
+						)}
+						{this.state.currentUser !== null ? (
+							<button className='headerButton' onClick={this.handleLogOut}>
+								Log Out
+							</button>
+						) : (
+							<>
+								<button
+									className='headerButton'
+									onClick={() => this.openModal('create')}
+								>
+									Create Account
+								</button>
+								<button
+									className='headerButton'
+									onClick={() => this.openModal('login')}
+								>
+									Log In
+								</button>
+							</>
+						)}
+					</div>
+				</div>
+
 				{/* Create Account Modal */}
 				<Modal
 					isOpen={this.state.modalIsOpen}
 					onRequestClose={this.closeModal}
 					ariaHideApp={false}
+					className='modal'
+					overlayClassName='overlay'
 				>
 					{this.state.currentModal === 'create' ? (
 						<>
-							<h2>Create Account</h2>
-							<button onClick={this.closeModal}>close</button>
+							<h2 className='modalTitle'>Create Account</h2>
+							<button className='closeModal' onClick={this.closeModal}>
+								close
+							</button>
 							<p>Create an account in order to make your own quizzes!</p>
 							<form onSubmit={this.handleCreateAccount}>
 								<input
@@ -159,8 +199,10 @@ class App extends React.Component {
 						</>
 					) : (
 						<>
-							<h2>Log In</h2>
-							<button onClick={this.closeModal}>close</button>
+							<h2 className='modalTitle'>Log In</h2>
+							<button className='closeModal' onClick={this.closeModal}>
+								close
+							</button>
 							<form onSubmit={this.handleLogIn}>
 								<input
 									type='email'
@@ -184,18 +226,8 @@ class App extends React.Component {
 						</>
 					)}
 				</Modal>
-				{this.state.currentUser && (
-					<>
-						<p>Current User: {this.state.currentUser}</p>
-						{!this.state.createQuiz && (
-							<button onClick={this.showCreateQuiz}>Create Quiz</button>
-						)}
-					</>
-				)}
-				{this.state.createQuiz && (
-					<button onClick={this.hideCreateQuiz}>Cancel Create Quiz</button>
-				)}
 				{this.state.createQuiz && <CreateQuiz baseURL={baseURL} />}
+				<ShowAllQuizzes />
 			</div>
 		);
 	}
