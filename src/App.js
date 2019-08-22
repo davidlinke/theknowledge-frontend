@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import CreateQuiz from './components/CreateQuiz';
 axios.defaults.withCredentials = true;
 
 const baseURL = 'http://localhost:3003';
@@ -17,7 +18,8 @@ class App extends React.Component {
 			password: '',
 			displayName: '',
 			currentUser: Cookies.get('user') || null,
-			invalidLogin: false
+			invalidLogin: false,
+			createQuiz: false
 		};
 
 		this.openModal = this.openModal.bind(this);
@@ -26,6 +28,8 @@ class App extends React.Component {
 		this.handleCreateAccount = this.handleCreateAccount.bind(this);
 		this.handleLogIn = this.handleLogIn.bind(this);
 		this.handleLogOut = this.handleLogOut.bind(this);
+		this.showCreateQuiz = this.showCreateQuiz.bind(this);
+		this.hideCreateQuiz = this.hideCreateQuiz.bind(this);
 	}
 
 	openModal(whichModal) {
@@ -91,6 +95,14 @@ class App extends React.Component {
 		const res = await axios.delete(`${baseURL}/sessions`, {});
 		alert(res.data)
 	}
+
+	showCreateQuiz = () => {
+		this.setState({ createQuiz: true });
+	};
+
+	hideCreateQuiz = () => {
+		this.setState({ createQuiz: false });
+	};
 
 	render() {
 		return (
@@ -172,7 +184,18 @@ class App extends React.Component {
 						</>
 					)}
 				</Modal>
-				<p>Current User: {this.state.currentUser}</p>
+				{this.state.currentUser && (
+					<>
+						<p>Current User: {this.state.currentUser}</p>
+						{!this.state.createQuiz && (
+							<button onClick={this.showCreateQuiz}>Create Quiz</button>
+						)}
+					</>
+				)}
+				{this.state.createQuiz && (
+					<button onClick={this.hideCreateQuiz}>Cancel Create Quiz</button>
+				)}
+				{this.state.createQuiz && <CreateQuiz baseURL={baseURL} />}
 			</div>
 		);
 	}
