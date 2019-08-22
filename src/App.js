@@ -88,7 +88,8 @@ class App extends React.Component {
 
 	async handleLogOut(event) {
 		this.setState({ currentUser: null });
-		await axios.delete(`${baseURL}/sessions`, {});
+		const res = await axios.delete(`${baseURL}/sessions`, {});
+		alert(res.data)
 	}
 
 	render() {
