@@ -256,7 +256,7 @@ class App extends React.Component {
               />
             )}
             {this.state.currentQuizId && (
-              <TakeQuiz quizID={this.state.currentQuizId} />
+              <TakeQuiz baseURL={baseURL} quizID={this.state.currentQuizId} />
             )}
             <footer>Created by David &amp; the Peter's</footer>
           </div>
