@@ -7,42 +7,42 @@ class ShowAllQuizzes extends React.Component {
 		this.state = {
 			quizzes: [],
 			random: ''
-		}
-		this.getQuizzes = this.getQuizzes.bind(this)
-	}; 
-	  async getQuizzes() {
+		};
+		this.getQuizzes = this.getQuizzes.bind(this);
+	}
+	async getQuizzes() {
 		const baseURL = this.props.baseURL;
 		const response = await Axios(`${baseURL}/quizzes`);
-		const data = response.data
+		const data = response.data;
 		this.setState({
 			quizzes: data
 		});
-	  };
-
-	  componentDidMount() {
-		this.getQuizzes();
-	  };
-
-	  render () {
-		return ( 
-			<div className='allQuizzesContainer'>
-			{this.state.quizzes.map(quiz => {
-				return (
-				 <div>
-					 <h5> {quiz.name}    </h5>
-					 <p>  {quiz.caption} </p>
-					<img src= {quiz.image}/>
-					 <p>  {quiz.updatedAt} </p>
-					</div>
-					)
-			})
-			}
-			<p>
-			{this.state.random}
-			</p>
-			</div>
-		)
 	}
-};
+
+	componentDidMount() {
+		this.getQuizzes();
+	}
+
+	render() {
+		return (
+			<div className='allQuizzesContainer'>
+				{this.state.quizzes.map(quiz => {
+					return (
+						<div>
+							<h5> {quiz.name} </h5>
+							<p> {quiz.caption} </p>
+							<img src={quiz.image} />
+							<p> {quiz.updatedAt} </p>
+							<button onClick={() => this.props.takeQuiz(quiz.id)}>
+								Take Quiz
+							</button>
+						</div>
+					);
+				})}
+				<p>{this.state.random}</p>
+			</div>
+		);
+	}
+}
 
 export default ShowAllQuizzes;
