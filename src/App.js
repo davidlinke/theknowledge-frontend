@@ -9,8 +9,8 @@ axios.defaults.withCredentials = true;
 const baseURL = 'http://localhost:3003';
 
 class App extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			modalIsOpen: false,
@@ -94,7 +94,8 @@ class App extends React.Component {
 
 	async handleLogOut(event) {
 		this.setState({ currentUser: null });
-		await axios.delete(`${baseURL}/sessions`, {});
+		const res = await axios.delete(`${baseURL}/sessions`, {});
+		alert(res.data)
 	}
 
 	showCreateQuiz = () => {
@@ -232,7 +233,7 @@ class App extends React.Component {
 				<div className='mainBodyParent'>
 					<div className='mainBody'>
 						{this.state.createQuiz && <CreateQuiz baseURL={baseURL} />}
-						{this.state.showQuizzes && <ShowAllQuizzes />}
+						{this.state.showQuizzes && <ShowAllQuizzes baseURL={baseURL}/>}
 						<footer>Created by David &amp; the Peter's</footer>
 					</div>
 				</div>
