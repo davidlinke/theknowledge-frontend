@@ -2,8 +2,9 @@ import React from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import CreateQuiz from './components/CreateQuiz';
-import ShowAllQuizzes from './components/ShowAllQuizzes';
+import CreateQuiz from './components/CreateQuiz.js';
+import ShowAllQuizzes from './components/ShowAllQuizzes.js';
+import TakeQuiz from './components/TakeQuiz.js';
 axios.defaults.withCredentials = true;
 
 const baseURL = 'http://localhost:3003';
@@ -21,7 +22,8 @@ class App extends React.Component {
       currentUser: Cookies.get('user') || null,
       invalidLogin: false,
       createQuiz: false,
-      showQuizzes: true
+      showQuizzes: true,
+      currentQuizId: null
     };
 
     this.openModal = this.openModal.bind(this);
@@ -32,6 +34,8 @@ class App extends React.Component {
     this.handleLogOut = this.handleLogOut.bind(this);
     this.showCreateQuiz = this.showCreateQuiz.bind(this);
     this.hideCreateQuiz = this.hideCreateQuiz.bind(this);
+    this.finishTakingQuiz = this.finishTakingQuiz.bind(this);
+    this.takeAQuiz = this.takeAQuiz.bind(this);
   }
 
   openModal(whichModal) {
@@ -103,6 +107,18 @@ class App extends React.Component {
 
   hideCreateQuiz = () => {
     this.setState({ createQuiz: false, showQuizzes: true });
+  };
+
+  takeAQuiz = id => {
+    this.setState({ createQuiz: false, showQuizzes: false, currentQuizId: id });
+  };
+
+  finishTakingQuiz = () => {
+    this.setState({
+      createQuiz: false,
+      showQuizzes: true,
+      currentQuizId: null
+    });
   };
 
   render() {
@@ -232,7 +248,16 @@ class App extends React.Component {
         <div className='mainBodyParent'>
           <div className='mainBody'>
             {this.state.createQuiz && <CreateQuiz baseURL={baseURL} />}
-            {this.state.showQuizzes && <ShowAllQuizzes baseURL={baseURL} />}
+            {this.state.showQuizzes && (
+              <ShowAllQuizzes
+                baseURL={baseURL}
+                takeQuiz={this.takeAQuiz}
+                stopQuiz={this.finishTakingQuiz}
+              />
+            )}
+            {this.state.currentQuizId && (
+              <TakeQuiz quizID={this.state.currentQuizId} />
+            )}
             <footer>Created by David &amp; the Peter's</footer>
           </div>
         </div>
