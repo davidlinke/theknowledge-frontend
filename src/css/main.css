@@ -281,3 +281,34 @@ select {
 .createSection3 {
 	background-color: var(--red);
 }
+
+.innerSliderDiv {
+	text-align: center;
+	/* margin: 0 auto; */
+	background: grey;
+	padding: 1rem 5%;
+}
+
+.answer {
+	display: block;
+	cursor: pointer;
+	width: 50%;
+	padding: 1rem;
+	margin: 1rem;
+}
+
+.answer1 {
+	background-color: var(--blue);
+}
+
+.answer2 {
+	background-color: var(--red);
+}
+
+.answer3 {
+	background-color: var(--yellow);
+}
+
+.answer4 {
+	background-color: var(--green);
+}
