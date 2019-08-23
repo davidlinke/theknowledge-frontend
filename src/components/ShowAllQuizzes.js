@@ -1,5 +1,5 @@
 import React from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 
 class ShowAllQuizzes extends React.Component {
 	constructor(props) {
@@ -9,14 +9,24 @@ class ShowAllQuizzes extends React.Component {
 			random: ''
 		};
 		this.getQuizzes = this.getQuizzes.bind(this);
+		this.deleteAQuiz = this.deleteAQuiz.bind(this);
 	}
 	async getQuizzes() {
+		console.log("Getting quizzes")
 		const baseURL = this.props.baseURL;
-		const response = await Axios(`${baseURL}/quizzes`);
+		const response = await axios(`${baseURL}/quizzes`);
 		const data = response.data;
 		this.setState({
 			quizzes: data
 		});
+	}
+
+	async deleteAQuiz (id) {
+		const baseURL = this.props.baseURL;
+		await axios.delete(`${baseURL}/quizzes/${id}`);
+		console.log('click');
+		this.getQuizzes();
+
 	}
 
 	componentDidMount() {
@@ -34,7 +44,10 @@ class ShowAllQuizzes extends React.Component {
 							<img src={quiz.image} />
 							<p> {quiz.updatedAt} </p>
 							<button onClick={() => this.props.takeQuiz(quiz.id)}>
-								Take Quiz
+							 Take {quiz.name}
+							</button>
+							<button onClick={() => this.deleteAQuiz(quiz.id)}>
+							 Delete {quiz.name}
 							</button>
 						</div>
 					);

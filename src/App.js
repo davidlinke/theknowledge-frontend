@@ -23,7 +23,8 @@ class App extends React.Component {
 			invalidLogin: false,
 			createQuiz: false,
 			showQuizzes: true,
-			currentQuizId: null
+			currentQuizId: null,
+			quizzes: []
 		};
 
 		this.openModal = this.openModal.bind(this);
@@ -252,7 +253,9 @@ class App extends React.Component {
 							<ShowAllQuizzes
 								baseURL={baseURL}
 								takeQuiz={this.takeAQuiz}
+								deleteQuiz={this.deleteAQuiz}
 								stopQuiz={this.finishTakingQuiz}
+								quizzes={this.state.quizzes}
 							/>
 						)}
 						{this.state.currentQuizId && (
