@@ -95,7 +95,6 @@ class App extends React.Component {
 	async handleLogOut(event) {
 		this.setState({ currentUser: null });
 		const res = await axios.delete(`${baseURL}/sessions`, {});
-		alert(res.data)
 	}
 
 	showCreateQuiz = () => {
@@ -233,7 +232,7 @@ class App extends React.Component {
 				<div className='mainBodyParent'>
 					<div className='mainBody'>
 						{this.state.createQuiz && <CreateQuiz baseURL={baseURL} />}
-						{this.state.showQuizzes && <ShowAllQuizzes baseURL={baseURL}/>}
+						{this.state.showQuizzes && <ShowAllQuizzes baseURL={baseURL} />}
 						<footer>Created by David &amp; the Peter's</footer>
 					</div>
 				</div>
