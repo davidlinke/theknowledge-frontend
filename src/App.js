@@ -19,7 +19,7 @@ class App extends React.Component {
 			email: '',
 			password: '',
 			displayName: '',
-			currentUser: Cookies.get('user') || null,
+			currentUser: Cookies.get('userid') || null,
 			invalidLogin: false,
 			createQuiz: false,
 			showQuizzes: true,
@@ -256,6 +256,7 @@ class App extends React.Component {
 								deleteQuiz={this.deleteAQuiz}
 								stopQuiz={this.finishTakingQuiz}
 								quizzes={this.state.quizzes}
+								currentUser={this.state.currentUser}
 							/>
 						)}
 						{this.state.currentQuizId && (

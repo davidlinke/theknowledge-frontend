@@ -32,11 +32,13 @@ class ShowAllQuizzes extends React.Component {
 		this.getQuizzes();
 	}
 
+	
+
 	render() {
 		return (
 			<div className='allQuizzesContainer'>
 				{this.state.quizzes.map(quiz => {
-					return (
+					return ( 
 						<div>
 							<h5> {quiz.name} </h5>
 							<p> {quiz.caption} </p>
@@ -44,10 +46,15 @@ class ShowAllQuizzes extends React.Component {
 							<p> {quiz.updatedAt} </p>
 							<button onClick={() => this.props.takeQuiz(quiz.id)}>
 							 Take {quiz.name}
-							</button>
-							<button onClick={() => this.deleteAQuiz(quiz.id)}>
-							 Delete {quiz.name}
-							</button>
+							</button>	
+							{ 
+								this.props.currentUser === quiz.createdBy 
+								?  <button onClick={() => this.deleteAQuiz(quiz.id)}>
+								Delete {quiz.name}
+							   </button>
+								: null
+							}
+							
 						</div>
 					);
 				})}
