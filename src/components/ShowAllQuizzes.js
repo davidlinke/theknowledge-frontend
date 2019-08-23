@@ -5,8 +5,7 @@ class ShowAllQuizzes extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			quizzes: [],
-			random: ''
+			quizzes: []
 		};
 		this.getQuizzes = this.getQuizzes.bind(this);
 	}
@@ -39,7 +38,6 @@ class ShowAllQuizzes extends React.Component {
 						</div>
 					);
 				})}
-				<p>{this.state.random}</p>
 			</div>
 		);
 	}
