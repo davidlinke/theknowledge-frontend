@@ -13,30 +13,38 @@ class CreateQuizResult extends React.Component {
 	render() {
 		return (
 			<>
-				<h3>Result {this.props.resultNumber + 1}</h3>
-				<input
-					type='text'
-					id='result'
-					name='result'
-					placeholder='Result'
-					onChange={event => this.handleChange(event, this.props.resultNumber)}
-					required
-				/>
-				<input
-					type='text'
-					id='resultImage'
-					name='resultImage'
-					placeholder='Result Image URL'
-					onChange={event => this.handleChange(event, this.props.resultNumber)}
-				/>
-				<input
-					type='text'
-					id='resultCaption'
-					name='resultCaption'
-					placeholder='Result Caption'
-					onChange={event => this.handleChange(event, this.props.resultNumber)}
-					required
-				/>
+				<h4>Result {this.props.resultNumber + 1}</h4>
+				<div className='inputRow'>
+					<input
+						type='text'
+						id='result'
+						name='result'
+						placeholder='Result'
+						onChange={event =>
+							this.handleChange(event, this.props.resultNumber)
+						}
+						required
+					/>
+					<input
+						type='text'
+						id='resultImage'
+						name='resultImage'
+						placeholder='Result Image URL'
+						onChange={event =>
+							this.handleChange(event, this.props.resultNumber)
+						}
+					/>
+					<input
+						type='text'
+						id='resultCaption'
+						name='resultCaption'
+						placeholder='Result Caption'
+						onChange={event =>
+							this.handleChange(event, this.props.resultNumber)
+						}
+						required
+					/>
+				</div>
 			</>
 		);
 	}

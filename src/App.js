@@ -20,7 +20,8 @@ class App extends React.Component {
 			displayName: '',
 			currentUser: Cookies.get('user') || null,
 			invalidLogin: false,
-			createQuiz: false
+			createQuiz: false,
+			showQuizzes: true
 		};
 
 		this.openModal = this.openModal.bind(this);
@@ -97,11 +98,11 @@ class App extends React.Component {
 	}
 
 	showCreateQuiz = () => {
-		this.setState({ createQuiz: true });
+		this.setState({ createQuiz: true, showQuizzes: false });
 	};
 
 	hideCreateQuiz = () => {
-		this.setState({ createQuiz: false });
+		this.setState({ createQuiz: false, showQuizzes: true });
 	};
 
 	render() {
@@ -117,7 +118,7 @@ class App extends React.Component {
 								{/* <p>Current User: {this.state.currentUser}</p> */}
 								{!this.state.createQuiz && (
 									<button
-										className='headerButton'
+										className='headerButton headerButtonImportant'
 										onClick={this.showCreateQuiz}
 									>
 										Create Quiz
@@ -126,7 +127,10 @@ class App extends React.Component {
 							</>
 						)}
 						{this.state.createQuiz && (
-							<button className='headerButton' onClick={this.hideCreateQuiz}>
+							<button
+								className='headerButton headerButtonImportantRed'
+								onClick={this.hideCreateQuiz}
+							>
 								Cancel Create Quiz
 							</button>
 						)}
@@ -137,7 +141,7 @@ class App extends React.Component {
 						) : (
 							<>
 								<button
-									className='headerButton'
+									className='headerButton headerButtonImportant'
 									onClick={() => this.openModal('create')}
 								>
 									Create Account
@@ -225,8 +229,13 @@ class App extends React.Component {
 						</>
 					)}
 				</Modal>
-				{this.state.createQuiz && <CreateQuiz baseURL={baseURL} />}
-				<ShowAllQuizzes />
+				<div className='mainBodyParent'>
+					<div className='mainBody'>
+						{this.state.createQuiz && <CreateQuiz baseURL={baseURL} />}
+						{this.state.showQuizzes && <ShowAllQuizzes />}
+						<footer>Created by David &amp; the Peter's</footer>
+					</div>
+				</div>
 			</div>
 		);
 	}
