@@ -107,7 +107,7 @@ class TakeQuiz extends React.Component {
 			swipe: false,
 			touchMove: false,
 			infinite: false,
-			speed: 250,
+			speed: 500,
 			slidesToShow: 1,
 			slidesToScroll: 1
 		};

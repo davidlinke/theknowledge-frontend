@@ -13,6 +13,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+<<<<<<< HEAD
     this.state = {
       modalIsOpen: false,
       currentModal: '',
@@ -25,6 +26,21 @@ class App extends React.Component {
       showQuizzes: true,
       currentQuizId: null
     };
+=======
+		this.state = {
+			modalIsOpen: false,
+			currentModal: '',
+			email: '',
+			password: '',
+			displayName: '',
+			currentUser: Cookies.get('userid') || null,
+			invalidLogin: false,
+			createQuiz: false,
+			showQuizzes: true,
+			currentQuizId: null,
+			quizzes: []
+		};
+>>>>>>> 58f74b6ef3f5713729bc41863ee70e3b5edb8337
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -173,6 +189,7 @@ class App extends React.Component {
           </div>
         </div>
 
+<<<<<<< HEAD
         {/* Create Account Modal */}
         <Modal
           isOpen={this.state.modalIsOpen}
@@ -264,6 +281,102 @@ class App extends React.Component {
       </div>
     );
   }
+=======
+				{/* Create Account Modal */}
+				<Modal
+					isOpen={this.state.modalIsOpen}
+					onRequestClose={this.closeModal}
+					ariaHideApp={false}
+					className='modal'
+					overlayClassName='overlay'
+				>
+					{this.state.currentModal === 'create' ? (
+						<>
+							<h2 className='modalTitle'>Create Account</h2>
+							<button className='closeModal' onClick={this.closeModal}>
+								close
+							</button>
+							<p>Create an account in order to make your own quizzes!</p>
+							<form onSubmit={this.handleCreateAccount}>
+								<input
+									type='email'
+									id='email'
+									name='email'
+									placeholder='email'
+									onChange={this.handleChange}
+									value={this.state.email}
+								/>
+								<input
+									type='password'
+									id='password'
+									name='password'
+									placeholder='password'
+									onChange={this.handleChange}
+									value={this.state.password}
+								/>
+								<input
+									type='text'
+									id='displayName'
+									name='displayName'
+									placeholder='display name'
+									onChange={this.handleChange}
+									value={this.state.displayName}
+								/>
+								<input type='submit' value='Create Account' />
+							</form>
+						</>
+					) : (
+						<>
+							<h2 className='modalTitle'>Log In</h2>
+							<button className='closeModal' onClick={this.closeModal}>
+								close
+							</button>
+							<form onSubmit={this.handleLogIn}>
+								<input
+									type='email'
+									id='email'
+									name='email'
+									placeholder='email'
+									onChange={this.handleChange}
+									value={this.state.email}
+								/>
+								<input
+									type='password'
+									id='password'
+									name='password'
+									placeholder='password'
+									onChange={this.handleChange}
+									value={this.state.password}
+								/>
+								<input type='submit' value='Log In' />
+								{this.state.invalidLogin && <p>Invalid Login, Try Again</p>}
+							</form>
+						</>
+					)}
+				</Modal>
+				<div className='mainBodyParent'>
+					<div className='mainBody'>
+						{this.state.createQuiz && <CreateQuiz baseURL={baseURL} />}
+						{this.state.showQuizzes && (
+							<ShowAllQuizzes
+								baseURL={baseURL}
+								takeQuiz={this.takeAQuiz}
+								deleteQuiz={this.deleteAQuiz}
+								stopQuiz={this.finishTakingQuiz}
+								quizzes={this.state.quizzes}
+								currentUser={this.state.currentUser}
+							/>
+						)}
+						{this.state.currentQuizId && (
+							<TakeQuiz baseURL={baseURL} quizID={this.state.currentQuizId} />
+						)}
+						<footer>Created by David &amp; the Peter's</footer>
+					</div>
+				</div>
+			</div>
+		);
+	}
+>>>>>>> 58f74b6ef3f5713729bc41863ee70e3b5edb8337
 }
 
 export default App;
