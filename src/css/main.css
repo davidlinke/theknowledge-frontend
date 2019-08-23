@@ -25,6 +25,10 @@ footer {
 	margin: 3rem 0;
 }
 
+button {
+	cursor: pointer;
+}
+
 .mainBodyParent {
 	margin: 0 auto;
 }
@@ -284,8 +288,7 @@ select {
 
 .innerSliderDiv {
 	text-align: center;
-	/* margin: 0 auto; */
-	background: grey;
+	background: white;
 	padding: 1rem 5%;
 }
 
@@ -295,6 +298,13 @@ select {
 	width: 50%;
 	padding: 1rem;
 	margin: 1rem;
+	color: var(--light-color);
+	text-shadow: 2px 2px 4px var(--dark-color);
+}
+
+/* Need this to prevent weird highlighting upon carousel slide changes */
+*:focus {
+	outline: none !important;
 }
 
 .answer1 {
