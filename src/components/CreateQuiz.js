@@ -158,45 +158,65 @@ class CreateQuiz extends React.Component {
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<h2>Create A Quiz!</h2>
-				<input
-					type='text'
-					id='quizName'
-					name='quizName'
-					placeholder='Quiz Name'
-					onChange={this.handleChange}
-					value={this.state.quizName}
-					required
-				/>
-				<input
-					type='text'
-					id='quizCaption'
-					name='quizCaption'
-					placeholder='Caption'
-					onChange={this.handleChange}
-					value={this.state.quizCaption}
-					required
-				/>
-				<input
-					type='text'
-					id='quizImage'
-					name='quizImage'
-					placeholder='Image URL'
-					onChange={this.handleChange}
-					value={this.state.quizImage}
-					required
-				/>
-				<h2>Results</h2>
-				{this.showResults()}
-				<button onClick={this.addResult}>Add Another Result</button>
-				{this.state.resultsCount > 1 && (
-					<button onClick={this.removeResult}>Remove Result</button>
-				)}
-				<h2>Questions</h2>
-				{this.showQuestions()}
-				<button onClick={this.addQuestion}>Add Another Question</button>
-				{this.state.questionsCount > 1 && (
-					<button onClick={this.removeQuestion}>Remove Question</button>
-				)}
+				<div className='createSection createSection1'>
+					<h3>Step 1</h3>
+					<p>Enter your quiz name, caption, and an image url.</p>
+					<div className='inputRow inputRowSection1'>
+						<input
+							type='text'
+							id='quizName'
+							name='quizName'
+							placeholder='Quiz Name'
+							onChange={this.handleChange}
+							value={this.state.quizName}
+							required
+						/>
+						<input
+							type='text'
+							id='quizCaption'
+							name='quizCaption'
+							placeholder='Caption'
+							onChange={this.handleChange}
+							value={this.state.quizCaption}
+							required
+						/>
+						<input
+							type='text'
+							id='quizImage'
+							name='quizImage'
+							placeholder='Image URL'
+							onChange={this.handleChange}
+							value={this.state.quizImage}
+							required
+						/>
+					</div>
+				</div>
+
+				<div className='createSection createSection2'>
+					<h3>Step 2</h3>
+					<p>
+						Enter the potential results for your quiz, each with a title, image
+						url, and caption.
+					</p>
+					{this.showResults()}
+					<button onClick={this.addResult}>Add Another Result</button>
+					{this.state.resultsCount > 1 && (
+						<button onClick={this.removeResult}>Remove Result</button>
+					)}
+				</div>
+
+				<div className='createSection createSection3'>
+					<h3>Step 3</h3>
+					<p>
+						Enter the questions for your quiz, each with a question and four
+						answers that are each linked to one of your results.
+					</p>
+					{this.showQuestions()}
+					<button onClick={this.addQuestion}>Add Another Question</button>
+					{this.state.questionsCount > 1 && (
+						<button onClick={this.removeQuestion}>Remove Question</button>
+					)}
+				</div>
 				<input type='submit' value='Create Quiz!' />
 			</form>
 		);

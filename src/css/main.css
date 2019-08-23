@@ -2,17 +2,36 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700&display=swap');
 
 :root {
-	--main-color: #e6aa50;
-	--dark-color: #111111;
-	--light-color: #f3f3f3;
+	--main-color: #06d6a0;
+	--dark-color: #222222;
+	--light-color: #fcfcfc;
+	--blue: #26547c;
+	--red: #ef476f;
+	--yellow: #ffd166;
+	--green: #06d6a0;
 }
 
 * {
 	font-family: 'Crimson Text', serif;
+	color: var(--dark-color);
 }
 
 body {
 	background-color: var(--light-color);
+}
+
+footer {
+	text-align: center;
+	margin: 3rem 0;
+}
+
+.mainBodyParent {
+	margin: 0 auto;
+}
+.mainBody {
+	margin: 2rem auto;
+	padding: 0 5%;
+	max-width: 1000px;
 }
 
 a,
@@ -27,12 +46,14 @@ a:active {
 	color: var(--main-color);
 }
 
-button:focus {
+button:focus,
+input:focus,
+select:focus {
 	outline: none;
 }
 
 .header {
-	background-color: var(--dark-color);
+	background-color: var(--blue);
 	color: var(--light-color);
 	display: flex;
 	flex-direction: row;
@@ -52,14 +73,54 @@ button:focus {
 	flex-grow: 1;
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	font-family: 'Oswald', sans-serif;
+}
+
+h1 {
 	font-weight: 300;
 	margin: 0;
 	padding: 0;
 	padding-bottom: 0.2rem;
 	display: inline-block;
 	flex-grow: 1;
+	color: var(--light-color);
+}
+
+h2 {
+	font-weight: 600;
+	text-align: center;
+	margin: 0;
+	margin-bottom: 2rem;
+	padding: 0;
+}
+
+h3 {
+	margin-top: 0;
+	margin-bottom: 1rem;
+	padding-bottom: 0;
+	font-weight: 300;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+h4 {
+	margin-top: 2rem;
+	font-weight: 600;
+}
+
+h5 {
+	font-weight: 300;
+}
+
+p {
+	text-align: center;
+	color: var(--dark-color);
 }
 
 .modalTitle {
@@ -89,20 +150,31 @@ h1 {
 	/* display: inline-block; */
 	margin: 0 1rem;
 	padding: 0.4rem 0.7rem;
-	background-color: var(--main-color);
+	background-color: var(--blue);
+	color: var(--light-color);
 	border: none;
 	font-weight: 400;
 	font-size: 0.8rem;
 }
 
-.headerButton:hover {
+.headerButtonImportant {
+	background-color: var(--green);
+	color: var(--blue);
+}
+
+.headerButtonImportantRed {
+	background-color: var(--red);
+	color: var(--light-color);
+}
+
+.headerButton:hover,
+.headerButtonImportant:hover {
 	cursor: pointer;
-	/* background-color: var(--light-color); */
 }
 
 .headerButton:active {
 	background-color: var(--light-color);
-	color: var(--dark-color);
+	color: var(--blue);
 }
 
 .modal {
@@ -127,4 +199,85 @@ h1 {
 	right: 0;
 	bottom: 0;
 	background-color: rgba(17, 17, 17, 0.9);
+}
+
+input {
+	box-sizing: border-box;
+	/* width: 25%; */
+	height: 2.5rem;
+	/* margin: 0 1%; */
+	padding: 0.5em;
+	font-size: 0.8rem;
+	border: none;
+	flex-grow: 1;
+}
+
+input[type='submit'] {
+	width: 15%;
+	cursor: pointer;
+	background: none;
+	border: none;
+	/* color: var(--dark-color); */
+	/* background-color: var(--medium-color); */
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	font-family: 'Oswald', sans-serif;
+}
+
+input[type='submit']:hover {
+	/* color: var(--white); */
+}
+
+.loginInput {
+	display: block;
+	width: 80%;
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	box-sizing: border-box;
+	height: 2.5rem;
+	border: none;
+	border-radius: 0;
+	padding: 0.5em;
+	font-size: 0.8rem;
+	flex-grow: 1;
+}
+
+.inputRow {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+	margin: 0 -0.5rem;
+}
+
+.inputRow > input,
+.inputRow > select {
+	margin: 0 0.5rem;
+}
+
+.inputRowSection1 {
+	margin-top: 2.5rem;
+}
+
+.createSection {
+	padding: 3%;
+	margin-bottom: 2rem;
+}
+
+.createSection1 {
+	background-color: var(--yellow);
+}
+
+.createSection2 {
+	background-color: var(--green);
+}
+
+.createSection3 {
+	background-color: var(--red);
 }
