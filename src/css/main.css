@@ -2,79 +2,79 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700&display=swap');
 
 :root {
-  --main-color: #06d6a0;
-  --dark-color: #222222;
-  --light-color: #fcfcfc;
-  --blue: #26547c;
-  --red: #ef476f;
-  --yellow: #ffd166;
-  --green: #06d6a0;
+	--main-color: #06d6a0;
+	--dark-color: #222222;
+	--light-color: #fcfcfc;
+	--blue: #26547c;
+	--red: #ef476f;
+	--yellow: #ffd166;
+	--green: #06d6a0;
 }
 
 * {
-  font-family: 'Crimson Text', serif;
-  color: var(--dark-color);
+	font-family: 'Crimson Text', serif;
+	color: var(--dark-color);
 }
 
 body {
-  background-color: var(--light-color);
+	background-color: var(--light-color);
 }
 
 footer {
-  text-align: center;
-  margin: 3rem 0;
+	text-align: center;
+	margin: 3rem 0;
 }
 
 button {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .mainBodyParent {
-  margin: 0 auto;
+	margin: 0 auto;
 }
 .mainBody {
-  margin: 2rem auto;
-  padding: 0 5%;
-  max-width: 1000px;
+	margin: 2rem auto;
+	padding: 0 5%;
+	max-width: 1000px;
 }
 
 a,
 a:visited {
-  color: var(--light-color);
+	color: var(--light-color);
 }
 
 a:hover {
 }
 
 a:active {
-  color: var(--main-color);
+	color: var(--main-color);
 }
 
 button:focus,
 input:focus,
 select:focus {
-  outline: none;
+	outline: none;
 }
 
 .header {
-  background-color: var(--blue);
-  color: var(--light-color);
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
+	background-color: var(--blue);
+	color: var(--light-color);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem;
 }
 
 .account {
-  display: inline;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: flex-end;
-  flex-grow: 1;
+	display: inline;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: center;
+	justify-content: flex-end;
+	flex-grow: 1;
 }
 
 h1,
@@ -83,264 +83,264 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Oswald', sans-serif;
+	font-family: 'Oswald', sans-serif;
 }
 
 h1 {
-  font-weight: 300;
-  margin: 0;
-  padding: 0;
-  padding-bottom: 0.2rem;
-  display: inline-block;
-  flex-grow: 1;
-  color: var(--light-color);
+	font-weight: 300;
+	margin: 0;
+	padding: 0;
+	padding-bottom: 0.2rem;
+	display: inline-block;
+	flex-grow: 1;
+	color: var(--light-color);
 }
 
 h2 {
-  font-weight: 600;
-  text-align: center;
-  margin: 0;
-  margin-bottom: 2rem;
-  padding: 0;
+	font-weight: 600;
+	text-align: center;
+	margin: 0;
+	margin-bottom: 2rem;
+	padding: 0;
 }
 
 h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  padding-bottom: 0;
-  font-weight: 300;
-  text-align: center;
-  text-transform: uppercase;
+	margin-top: 0;
+	margin-bottom: 1rem;
+	padding-bottom: 0;
+	font-weight: 300;
+	text-align: center;
+	text-transform: uppercase;
 }
 
 h4 {
-  margin-top: 2rem;
-  font-weight: 600;
+	margin-top: 2rem;
+	font-weight: 600;
 }
 
 h5 {
-  font-weight: 300;
+	font-weight: 300;
 }
 
 p {
-  text-align: center;
-  color: var(--dark-color);
+	text-align: center;
+	color: var(--dark-color);
 }
 
 .modalTitle {
-  color: var(--dark-color);
-  font-family: 'Oswald', sans-serif;
-  font-weight: 500;
-  text-align: center;
-  margin: 2rem 0;
+	color: var(--dark-color);
+	font-family: 'Oswald', sans-serif;
+	font-weight: 500;
+	text-align: center;
+	margin: 2rem 0;
 }
 
 .closeModal {
-  background-color: var(--light-color);
-  color: var(--dark-color);
-  border: none;
-  position: fixed;
-  top: 22%;
-  right: 22%;
-  text-transform: uppercase;
-  font-family: 'Oswald', sans-serif;
-  font-weight: 200;
-  font-size: 1rem;
-  padding: 0.5rem;
-  cursor: pointer;
+	background-color: var(--light-color);
+	color: var(--dark-color);
+	border: none;
+	position: fixed;
+	top: 22%;
+	right: 22%;
+	text-transform: uppercase;
+	font-family: 'Oswald', sans-serif;
+	font-weight: 200;
+	font-size: 1rem;
+	padding: 0.5rem;
+	cursor: pointer;
 }
 
 .headerButton {
-  /* display: inline-block; */
-  margin: 0 1rem;
-  padding: 0.4rem 0.7rem;
-  background-color: var(--blue);
-  color: var(--light-color);
-  border: none;
-  font-weight: 400;
-  font-size: 0.8rem;
+	/* display: inline-block; */
+	margin: 0 1rem;
+	padding: 0.4rem 0.7rem;
+	background-color: var(--blue);
+	color: var(--light-color);
+	border: none;
+	font-weight: 400;
+	font-size: 0.8rem;
 }
 
 .headerButtonImportant {
-  background-color: var(--green);
-  color: var(--blue);
+	background-color: var(--green);
+	color: var(--blue);
 }
 
 .headerButtonImportantRed {
-  background-color: var(--red);
-  color: var(--light-color);
+	background-color: var(--red);
+	color: var(--light-color);
 }
 
 .headerButton:hover,
 .headerButtonImportant:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .headerButton:active {
-  background-color: var(--light-color);
-  color: var(--blue);
+	background-color: var(--light-color);
+	color: var(--blue);
 }
 
 .modal {
-  position: absolute;
-  top: 20%;
-  left: 20%;
-  right: 20%;
-  bottom: 20%;
-  border: 1px solid var(--dark-color);
-  background: var(--light-color);
-  overflow: auto;
-  -webkit-overflow-scrolling: 'touch';
-  outline: none;
-  /* border-radius: 4px; */
-  padding: 20px;
+	position: absolute;
+	top: 20%;
+	left: 20%;
+	right: 20%;
+	bottom: 20%;
+	border: 1px solid var(--dark-color);
+	background: var(--light-color);
+	overflow: auto;
+	-webkit-overflow-scrolling: 'touch';
+	outline: none;
+	/* border-radius: 4px; */
+	padding: 20px;
 }
 
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(17, 17, 17, 0.9);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(17, 17, 17, 0.9);
 }
 
 input {
-  box-sizing: border-box;
-  /* width: 25%; */
-  height: 2.5rem;
-  /* margin: 0 1%; */
-  padding: 0.5em;
-  font-size: 0.8rem;
-  border: none;
-  flex-grow: 1;
+	box-sizing: border-box;
+	/* width: 25%; */
+	height: 2.5rem;
+	/* margin: 0 1%; */
+	padding: 0.5em;
+	font-size: 0.8rem;
+	border: none;
+	flex-grow: 1;
 }
 
 input[type='submit'] {
-  width: 15%;
-  cursor: pointer;
-  background: none;
-  border: none;
-  /* color: var(--dark-color); */
-  /* background-color: var(--medium-color); */
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  font-family: 'Oswald', sans-serif;
+	width: 15%;
+	cursor: pointer;
+	background: none;
+	border: none;
+	/* color: var(--dark-color); */
+	/* background-color: var(--medium-color); */
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	font-family: 'Oswald', sans-serif;
 }
 
 input[type='submit']:hover {
-  /* color: var(--white); */
+	/* color: var(--white); */
 }
 
 .loginInput {
-  display: block;
-  width: 80%;
+	display: block;
+	width: 80%;
 }
 
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  box-sizing: border-box;
-  height: 2.5rem;
-  border: none;
-  border-radius: 0;
-  padding: 0.5em;
-  font-size: 0.8rem;
-  flex-grow: 1;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	box-sizing: border-box;
+	height: 2.5rem;
+	border: none;
+	border-radius: 0;
+	padding: 0.5em;
+	font-size: 0.8rem;
+	flex-grow: 1;
 }
 
 .inputRow {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
-  margin: 0 -0.5rem;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+	margin: 0 -0.5rem;
 }
 
 .inputRow > input,
 .inputRow > select {
-  margin: 0 0.5rem;
+	margin: 0 0.5rem;
 }
 
 .inputRowSection1 {
-  margin-top: 2.5rem;
+	margin-top: 2.5rem;
 }
 
 .createSection {
-  padding: 3%;
-  margin-bottom: 2rem;
+	padding: 3%;
+	margin-bottom: 2rem;
 }
 
 .createSection1 {
-  background-color: var(--yellow);
+	background-color: var(--yellow);
 }
 
 .createSection2 {
-  background-color: var(--green);
+	background-color: var(--green);
 }
 
 .createSection3 {
-  background-color: var(--red);
+	background-color: var(--red);
 }
 
 .innerSliderDiv {
-  text-align: center;
-  background: white;
-  padding: 1rem 5%;
+	text-align: center;
+	background: white;
+	padding: 1rem 5%;
 }
 
 .answer {
-  display: block;
-  cursor: pointer;
-  width: 50%;
-  padding: 1rem;
-  margin: 1rem;
-  color: var(--light-color);
-  text-shadow: 2px 2px 4px var(--dark-color);
+	display: block;
+	cursor: pointer;
+	width: 50%;
+	padding: 1rem;
+	margin: 1rem;
+	color: var(--light-color);
+	text-shadow: 2px 2px 4px var(--dark-color);
 }
 
 /* Need this to prevent weird highlighting upon carousel slide changes */
 *:focus {
-  outline: none !important;
+	outline: none !important;
 }
 
 .answer1 {
-  background-color: var(--blue);
+	background-color: var(--blue);
 }
 
 .answer2 {
-  background-color: var(--red);
+	background-color: var(--red);
 }
 
 .answer3 {
-  background-color: var(--yellow);
+	background-color: var(--yellow);
 }
 
 .answer4 {
-  background-color: var(--green);
+	background-color: var(--green);
 }
 
 .card img {
-  width: 100%;
+	width: 100%;
 }
 
 .card {
-  width: 200px;
-  background: grey;
+	width: 200px;
+	background: grey;
 }
 
 .allQuizzesContainer {
 }
 
 .cardContainer {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  flex: none;
-  justify-content: space-evenly;
-  align-items: flex-start;
-  align-content: flex-start;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex: none;
+	justify-content: space-evenly;
+	align-items: flex-start;
+	align-content: flex-start;
 }
