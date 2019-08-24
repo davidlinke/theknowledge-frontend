@@ -380,6 +380,27 @@ select {
 	background-color: var(--green);
 }
 
+.card img {
+	width: 100%;
+}
+
+.card {
+	width: 200px;
+	background: grey;
+}
+
+.allQuizzesContainer {
+}
+
+.cardContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex: none;
+	justify-content: space-evenly;
+	align-items: flex-start;
+	align-content: flex-start;
+
 .questionImageDiv {
 	margin: 0 auto;
 	width: 50vw;
