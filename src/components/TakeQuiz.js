@@ -111,58 +111,129 @@ class TakeQuiz extends React.Component {
 			slidesToShow: 1,
 			slidesToScroll: 1
 		};
+
+		const minImageURLLength = 11;
+
 		return (
 			<div>
-				{this.state.quiz && <h2>{this.state.quiz.name}</h2>}
+				{this.state.quiz && (
+					<h3>
+						<span className='h3LessEmphasis'>Quiz:</span>
+						{this.state.quiz.name}
+					</h3>
+				)}
 				<Slider ref='slider' {...settings}>
 					{!this.state.quiz && (
 						<div>
-							<h4>Loading Quiz!</h4>
+							<h3>Loading Quiz!</h3>
 						</div>
 					)}
 					{this.state.quiz && (
 						<div>
-							<h4>{this.state.quiz.caption}</h4>
-							<img src={this.state.quiz.image} width='400px' />
-							<button onClick={this.nextSlide}>Get Started</button>
+							<div
+								className='questionImageDiv'
+								style={{
+									backgroundImage:
+										this.state.quiz.image.length > minImageURLLength
+											? `url(${this.state.quiz.image})`
+											: 'none',
+									backgroundSize: 'cover',
+									backgroundRepeat: 'no-repeat',
+									backgroundPosition: '50% 50%'
+								}}
+							>
+								<h2 className='quizQuestionCaption'>
+									{this.state.quiz.caption}
+								</h2>
+								<button className='quizButton' onClick={this.nextSlide}>
+									Get Started
+								</button>
+							</div>
 						</div>
 					)}
 					{this.state.quiz &&
 						this.state.quiz.questions.map(question => {
 							return (
 								<div>
-									<h5>{question.question}</h5>
-									<div
-										className='answer answer1'
-										onClick={() => this.answerQuestion(question.answer1result)}
-									>
-										{question.answer1}
-									</div>
-									<div
-										className='answer answer2'
-										onClick={() => this.answerQuestion(question.answer2result)}
-									>
-										{question.answer2}
-									</div>
-									<div
-										className='answer answer3'
-										onClick={() => this.answerQuestion(question.answer3result)}
-									>
-										{question.answer3}
-									</div>
-									<div
-										className='answer answer4'
-										onClick={() => this.answerQuestion(question.answer4result)}
-									>
-										{question.answer4}
+									<h2>{question.question}</h2>
+									<div className='answersContainer'>
+										<div className='answersRow'>
+											<div
+												className='answer answer1'
+												onClick={() =>
+													this.answerQuestion(question.answer1result)
+												}
+												style={{
+													backgroundImage:
+														question.answer1img.length > minImageURLLength
+															? `url(${question.answer1img})`
+															: 'none',
+													backgroundSize: 'cover',
+													backgroundRepeat: 'no-repeat',
+													backgroundPosition: '50% 50%'
+												}}
+											>
+												<p className='answerText'>{question.answer1}</p>
+											</div>
+											<div
+												className='answer answer2'
+												onClick={() =>
+													this.answerQuestion(question.answer2result)
+												}
+												style={{
+													backgroundImage:
+														question.answer2img.length > minImageURLLength
+															? `url(${question.answer2img})`
+															: 'none',
+													backgroundSize: 'cover',
+													backgroundRepeat: 'no-repeat',
+													backgroundPosition: '50% 50%'
+												}}
+											>
+												<p className='answerText'>{question.answer2}</p>
+											</div>
+										</div>
+										<div className='answersRow'>
+											<div
+												className='answer answer3'
+												onClick={() =>
+													this.answerQuestion(question.answer3result)
+												}
+												style={{
+													backgroundImage:
+														question.answer3img.length > minImageURLLength
+															? `url(${question.answer3img})`
+															: 'none',
+													backgroundSize: 'cover',
+													backgroundRepeat: 'no-repeat',
+													backgroundPosition: '50% 50%'
+												}}
+											>
+												<p className='answerText'>{question.answer3}</p>
+											</div>
+											<div
+												className='answer answer4'
+												onClick={() =>
+													this.answerQuestion(question.answer4result)
+												}
+												style={{
+													backgroundImage:
+														question.answer4img.length > minImageURLLength
+															? `url(${question.answer4img})`
+															: 'none',
+													backgroundSize: 'cover',
+													backgroundRepeat: 'no-repeat',
+													backgroundPosition: '50% 50%'
+												}}
+											>
+												<p className='answerText'>{question.answer4}</p>
+											</div>
+										</div>
 									</div>
 								</div>
 							);
 						})}
-					<div>
-						<h4>Results</h4>
-						{this.state.quiz && this.getResult()}
-					</div>
+					<div>{this.state.quiz && this.getResult()}</div>
 				</Slider>
 			</div>
 		);
