@@ -5,11 +5,14 @@ class ShowAllQuizzes extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			quizzes: []
+			quizzes: [],
+			currentColorIndex: 0
 		};
 		this.getQuizzes = this.getQuizzes.bind(this);
 		this.deleteAQuiz = this.deleteAQuiz.bind(this);
+		this.getRandomColor = this.getRandomColor.bind(this);
 	}
+
 	async getQuizzes() {
 		console.log('Getting quizzes');
 		const baseURL = this.props.baseURL;
@@ -27,6 +30,18 @@ class ShowAllQuizzes extends React.Component {
 		this.getQuizzes();
 	}
 
+	getRandomColor = () => {
+		const colors = [
+			'var(--blue)',
+			'var(--green)',
+			'var(--red)',
+			'var(--yellow)'
+		];
+
+		const randomInt = Math.floor(Math.random() * colors.length);
+		return colors[randomInt];
+	};
+
 	componentDidMount() {
 		this.getQuizzes();
 	}
@@ -34,10 +49,16 @@ class ShowAllQuizzes extends React.Component {
 	render() {
 		return (
 			<div className='allQuizzesContainer'>
+				<h2>Check out quizzes better than BuzzFeed's and create your own!</h2>
 				<div className='cardContainer'>
 					{this.state.quizzes.map(quiz => {
 						return (
-							<div className='card'>
+							<div
+								style={{
+									backgroundColor: this.getRandomColor()
+								}}
+								className='card'
+							>
 								<h5> {quiz.name} </h5>
 								<p> {quiz.caption} </p>
 								<img src={quiz.image} />
