@@ -132,7 +132,6 @@ class App extends React.Component {
 					<div className='account'>
 						{this.state.currentUser && (
 							<>
-								{/* <p>Current User: {this.state.currentUser}</p> */}
 								{!this.state.createQuiz && (
 									<button
 										className='headerButton headerButtonImportant'
@@ -197,6 +196,7 @@ class App extends React.Component {
 									placeholder='email'
 									onChange={this.handleChange}
 									value={this.state.email}
+									required
 								/>
 								<input
 									type='password'
@@ -205,6 +205,7 @@ class App extends React.Component {
 									placeholder='password'
 									onChange={this.handleChange}
 									value={this.state.password}
+									required
 								/>
 								<input
 									type='text'
@@ -213,6 +214,7 @@ class App extends React.Component {
 									placeholder='display name'
 									onChange={this.handleChange}
 									value={this.state.displayName}
+									required
 								/>
 								<input type='submit' value='Create Account' />
 							</form>
@@ -231,6 +233,7 @@ class App extends React.Component {
 									placeholder='email'
 									onChange={this.handleChange}
 									value={this.state.email}
+									required
 								/>
 								<input
 									type='password'
@@ -239,6 +242,7 @@ class App extends React.Component {
 									placeholder='password'
 									onChange={this.handleChange}
 									value={this.state.password}
+									required
 								/>
 								<input type='submit' value='Log In' />
 								{this.state.invalidLogin && <p>Invalid Login, Try Again</p>}

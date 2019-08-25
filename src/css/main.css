@@ -26,7 +26,8 @@ footer {
 	margin: 3rem 0;
 }
 
-button {
+button,
+input[type='submit'] {
 	cursor: pointer;
 	padding: 0.4rem 0.7rem;
 	background-color: var(--blue);
@@ -171,6 +172,17 @@ h5 {
 	font-weight: 300;
 }
 
+.createdBy {
+	text-align: center;
+	text-transform: capitalize;
+	color: var(--blue);
+}
+
+.createdBy span {
+	font-family: 'Oswald', sans-serif;
+	color: var(--dark-color);
+}
+
 p {
 	text-align: center;
 	color: var(--dark-color);
@@ -261,7 +273,7 @@ input {
 	flex-grow: 1;
 }
 
-input[type='submit'] {
+/* input[type='submit'] {
 	width: 15%;
 	cursor: pointer;
 	background: none;
@@ -269,7 +281,7 @@ input[type='submit'] {
 	text-transform: uppercase;
 	font-size: 0.8rem;
 	font-family: 'Oswald', sans-serif;
-}
+} */
 
 .loginInput {
 	display: block;
