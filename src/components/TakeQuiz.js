@@ -8,7 +8,8 @@ class TakeQuiz extends React.Component {
 		this.state = {
 			quiz: null,
 			resultsCount: [],
-			minImageURLLength: 11
+			minImageURLLength: 11,
+			quizCreatorDisplayName: ''
 		};
 		this.getQuiz = this.getQuiz.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
@@ -19,17 +20,18 @@ class TakeQuiz extends React.Component {
 			this
 		);
 		this.getResult = this.getResult.bind(this);
+		this.getQuizCreatorDisplayName = this.getQuizCreatorDisplayName.bind(this);
 	}
 
 	async getQuiz(id) {
 		const baseURL = this.props.baseURL;
 		const response = await Axios(`${baseURL}/quizzes/${this.props.quizID}`);
 		const data = response.data;
-		// console.log(data);
 		this.setState({
 			quiz: data
 		});
 		this.initializeResultsCountArray(data.results.length);
+		this.getQuizCreatorDisplayName(data.createdBy);
 	}
 
 	componentDidMount() {
@@ -44,6 +46,14 @@ class TakeQuiz extends React.Component {
 		this.refs.slider.slickPrev();
 	}
 
+	async getQuizCreatorDisplayName(userid) {
+		const baseURL = this.props.baseURL;
+		const response = await Axios(`${baseURL}/users/${userid}`);
+		this.setState({
+			quizCreatorDisplayName: response.data
+		});
+	}
+
 	initializeResultsCountArray = resultsLength => {
 		const array = [];
 		for (let i = 0; i < resultsLength; i++) {
@@ -55,10 +65,8 @@ class TakeQuiz extends React.Component {
 	};
 
 	answerQuestion = resultIndex => {
-		// console.log('Result Index is: ' + resultIndex);
 		let resultsCountTemp = this.state.resultsCount;
 		resultsCountTemp[resultIndex] += 1;
-		// console.log(resultsCountTemp);
 		this.setState({
 			resultsCount: resultsCountTemp
 		});
@@ -68,10 +76,6 @@ class TakeQuiz extends React.Component {
 	calculateResult = () => {
 		const maxCount = Math.max(...this.state.resultsCount);
 		const resultIndexPosition = this.state.resultsCount.indexOf(maxCount);
-
-		// console.log('Max Count is: ' + maxCount);
-		// console.log('Index position of result is: ' + resultIndexPosition);
-
 		return resultIndexPosition;
 	};
 
@@ -82,20 +86,26 @@ class TakeQuiz extends React.Component {
 		} else {
 			// console.log('Result Position ' + resultPosition);
 			// console.log(this.state.quiz.results[resultPosition].result);
+			// console.log(this.state.resultsCount);
+			// console.log(this.state.quiz.results[resultPosition].resultImage);
+			// console.log(this.state.quiz.results[resultPosition].resultImage.length);
+
 			const resultContent = [];
 			resultContent.push(
-				<h2 className='resultTitle'>
+				<h2 className='resultTitle' key='resultTitle'>
 					{this.state.quiz.results[resultPosition].result}
 				</h2>
 			);
 			resultContent.push(
-				<h3 className='resultCaption'>
+				<h3 className='resultCaption' key='resultCaption'>
 					{this.state.quiz.results[resultPosition].resultCaption}
 				</h3>
 			);
+
 			return (
 				<div
 					className='resultsImageDiv'
+					key='resultsImageDiv'
 					style={{
 						backgroundImage:
 							this.state.quiz.results[resultPosition].resultImage &&
@@ -133,10 +143,15 @@ class TakeQuiz extends React.Component {
 		return (
 			<div>
 				{this.state.quiz && (
-					<h3>
-						<span className='h3LessEmphasis'>Quiz:</span>
-						{this.state.quiz.name}
-					</h3>
+					<>
+						<h3>
+							<span className='h3LessEmphasis'>Quiz:</span>
+							{this.state.quiz.name}
+						</h3>
+						<h5 className='createdBy'>
+							By <span>{this.state.quizCreatorDisplayName}</span>
+						</h5>
+					</>
 				)}
 				<Slider ref='slider' {...settings}>
 					{!this.state.quiz && (
@@ -168,9 +183,9 @@ class TakeQuiz extends React.Component {
 						</div>
 					)}
 					{this.state.quiz &&
-						this.state.quiz.questions.map(question => {
+						this.state.quiz.questions.map((question, index) => {
 							return (
-								<div>
+								<div key={'quizQuestion' + index}>
 									<h2>{question.question}</h2>
 									<div className='answersContainer'>
 										<div className='answersRow'>
@@ -258,7 +273,11 @@ class TakeQuiz extends React.Component {
 							);
 						})}
 					<div>
-						{this.state.quiz && this.getResult()}
+						{this.state.quiz &&
+							this.state.resultsCount.length > 0 &&
+							// this.state.resultsCount.reduce((x, y) => x + y) ===
+							// 	this.state.quiz.questions.length &&
+							this.getResult()}
 						<button className='finishQuizButton' onClick={this.props.stopQuiz}>
 							Back To Quizzes
 						</button>
