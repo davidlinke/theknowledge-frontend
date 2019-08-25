@@ -29,7 +29,7 @@ class TakeQuiz extends React.Component {
 			`${this.props.baseURL}/quizzes/${this.props.quizID}`
 		);
 		const data = response.data;
-		console.log(data);
+		// console.log(data);
 		this.setState({
 			quiz: data
 		});
@@ -65,11 +65,7 @@ class TakeQuiz extends React.Component {
 	}
 
 	async quizCountUpdate() {
-		const response = await axios.put(
-			`${this.props.baseURL}/quizzes/${this.state.quiz._id}`
-		);
-		console.log('QUIZ COUNT RESPONSE HERE');
-		console.log(response);
+		await axios.put(`${this.props.baseURL}/quizzes/${this.state.quiz._id}`);
 	}
 
 	initializeResultsCountArray = resultsLength => {
