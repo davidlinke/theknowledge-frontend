@@ -201,10 +201,19 @@ class CreateQuiz extends React.Component {
 						url, and caption.
 					</p>
 					{this.showResults()}
-					<button onClick={this.addResult}>Add Another Result</button>
-					{this.state.resultsCount > 1 && (
-						<button onClick={this.removeResult}>Remove Result</button>
-					)}
+					<div className='formButtonsContainer'>
+						<button class='createFormButton' onClick={this.addResult}>
+							Add Another Result
+						</button>
+						{this.state.resultsCount > 1 && (
+							<button
+								class='createFormButton removeButtonRed'
+								onClick={this.removeResult}
+							>
+								Remove Result
+							</button>
+						)}
+					</div>
 				</div>
 
 				<div className='createSection createSection3'>
@@ -214,12 +223,23 @@ class CreateQuiz extends React.Component {
 						answers that are each linked to one of your results.
 					</p>
 					{this.showQuestions()}
-					<button onClick={this.addQuestion}>Add Another Question</button>
-					{this.state.questionsCount > 1 && (
-						<button onClick={this.removeQuestion}>Remove Question</button>
-					)}
+					<div className='formButtonsContainer'>
+						<button class='createFormButton' onClick={this.addQuestion}>
+							Add Another Question
+						</button>
+						{this.state.questionsCount > 1 && (
+							<button
+								class='createFormButton removeButtonYellow'
+								onClick={this.removeQuestion}
+							>
+								Remove Question
+							</button>
+						)}
+					</div>
 				</div>
-				<input type='submit' value='Create Quiz!' />
+				<div className='createQuizButtonContainer'>
+					<input class='createQuizButton' type='submit' value='Create Quiz!' />
+				</div>
 			</form>
 		);
 	}

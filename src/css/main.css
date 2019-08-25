@@ -197,11 +197,11 @@ p {
 }
 
 .closeModal {
-	background-color: var(--light-color);
-	color: var(--dark-color);
+	background-color: var(--red);
+	color: var(--light-color);
 	border: none;
 	position: fixed;
-	top: 22%;
+	top: 32%;
 	right: 22%;
 	text-transform: uppercase;
 	font-family: 'Oswald', sans-serif;
@@ -243,12 +243,12 @@ p {
 
 .modal {
 	position: absolute;
-	top: 20%;
+	top: 30%;
 	left: 20%;
 	right: 20%;
-	bottom: 20%;
+	bottom: 30%;
 	border: 1px solid var(--dark-color);
-	background: var(--light-color);
+	background: var(--medium-color);
 	overflow: auto;
 	-webkit-overflow-scrolling: 'touch';
 	outline: none;
@@ -272,16 +272,6 @@ input {
 	border: none;
 	flex-grow: 1;
 }
-
-/* input[type='submit'] {
-	width: 15%;
-	cursor: pointer;
-	background: none;
-	border: none;
-	text-transform: uppercase;
-	font-size: 0.8rem;
-	font-family: 'Oswald', sans-serif;
-} */
 
 .loginInput {
 	display: block;
@@ -320,6 +310,21 @@ select {
 	margin-top: 2.5rem;
 }
 
+.modalInputRow {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+	margin: 0 -0.5rem;
+}
+
+.modalInputRow > input {
+	margin: 0.5rem 0.5rem;
+	width: 60%;
+}
+
 .createSection {
 	padding: 3%;
 	margin-bottom: 2rem;
@@ -335,6 +340,36 @@ select {
 
 .createSection3 {
 	background-color: var(--red);
+}
+
+.formButtonsContainer {
+	text-align: center;
+}
+
+.createFormButton {
+	margin: 2rem 0.5rem 0 0.5rem;
+}
+
+.removeButtonRed {
+	background-color: var(--red);
+}
+
+.removeButtonYellow {
+	background-color: var(--yellow);
+}
+
+.createQuizButtonContainer {
+	text-align: center;
+}
+
+.createQuizButton {
+	font-size: 1.2rem !important;
+	background-color: var(--green) !important;
+	color: var(--light-color) !important;
+}
+
+.createQuizButton:active {
+	background-color: var(--medium-color) !important;
 }
 
 .innerSliderDiv {
@@ -498,7 +533,28 @@ select {
 	margin-bottom: 0;
 }
 
+@media only screen and (max-height: 1000px) {
+	.modal {
+		top: 5%;
+		bottom: 5%;
+		padding: 20px;
+	}
+
+	.closeModal {
+		top: 7%;
+	}
+}
+
 @media only screen and (max-width: 1000px) {
+	.modal {
+		left: 5%;
+		right: 5%;
+	}
+
+	.closeModal {
+		right: 7%;
+	}
+
 	.innerSliderDiv {
 		padding: 1rem 0;
 		margin: 4rem 0;
@@ -507,6 +563,21 @@ select {
 	.resultsImageDiv {
 		width: 80vw;
 		height: 80vw;
+	}
+
+	.inputRow {
+		flex-direction: column;
+		margin: 0 -0.5rem;
+	}
+
+	.inputRow > input,
+	.inputRow > select {
+		width: 96%;
+		margin: 0.5rem 0;
+	}
+
+	.createFormButton {
+		margin: 0.5rem;
 	}
 }
 

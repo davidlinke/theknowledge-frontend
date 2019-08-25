@@ -103,11 +103,19 @@ class App extends React.Component {
 	}
 
 	showCreateQuiz = () => {
-		this.setState({ createQuiz: true, showQuizzes: false });
+		this.setState({
+			createQuiz: true,
+			showQuizzes: false,
+			currentQuizId: null
+		});
 	};
 
 	hideCreateQuiz = () => {
-		this.setState({ createQuiz: false, showQuizzes: true });
+		this.setState({
+			createQuiz: false,
+			showQuizzes: true,
+			currentQuizId: null
+		});
 	};
 
 	takeAQuiz = id => {
@@ -189,34 +197,36 @@ class App extends React.Component {
 							</button>
 							<p>Create an account in order to make your own quizzes!</p>
 							<form onSubmit={this.handleCreateAccount}>
-								<input
-									type='email'
-									id='email'
-									name='email'
-									placeholder='email'
-									onChange={this.handleChange}
-									value={this.state.email}
-									required
-								/>
-								<input
-									type='password'
-									id='password'
-									name='password'
-									placeholder='password'
-									onChange={this.handleChange}
-									value={this.state.password}
-									required
-								/>
-								<input
-									type='text'
-									id='displayName'
-									name='displayName'
-									placeholder='display name'
-									onChange={this.handleChange}
-									value={this.state.displayName}
-									required
-								/>
-								<input type='submit' value='Create Account' />
+								<div className='modalInputRow'>
+									<input
+										type='email'
+										id='email'
+										name='email'
+										placeholder='email'
+										onChange={this.handleChange}
+										value={this.state.email}
+										required
+									/>
+									<input
+										type='password'
+										id='password'
+										name='password'
+										placeholder='password'
+										onChange={this.handleChange}
+										value={this.state.password}
+										required
+									/>
+									<input
+										type='text'
+										id='displayName'
+										name='displayName'
+										placeholder='display name'
+										onChange={this.handleChange}
+										value={this.state.displayName}
+										required
+									/>
+									<input type='submit' value='Create Account' />
+								</div>
 							</form>
 						</>
 					) : (
@@ -226,26 +236,28 @@ class App extends React.Component {
 								close
 							</button>
 							<form onSubmit={this.handleLogIn}>
-								<input
-									type='email'
-									id='email'
-									name='email'
-									placeholder='email'
-									onChange={this.handleChange}
-									value={this.state.email}
-									required
-								/>
-								<input
-									type='password'
-									id='password'
-									name='password'
-									placeholder='password'
-									onChange={this.handleChange}
-									value={this.state.password}
-									required
-								/>
-								<input type='submit' value='Log In' />
-								{this.state.invalidLogin && <p>Invalid Login, Try Again</p>}
+								<div className='modalInputRow'>
+									<input
+										type='email'
+										id='email'
+										name='email'
+										placeholder='email'
+										onChange={this.handleChange}
+										value={this.state.email}
+										required
+									/>
+									<input
+										type='password'
+										id='password'
+										name='password'
+										placeholder='password'
+										onChange={this.handleChange}
+										value={this.state.password}
+										required
+									/>
+									<input type='submit' value='Log In' />
+									{this.state.invalidLogin && <p>Invalid Login, Try Again</p>}
+								</div>
 							</form>
 						</>
 					)}

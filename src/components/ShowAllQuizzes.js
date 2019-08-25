@@ -18,7 +18,7 @@ class ShowAllQuizzes extends React.Component {
 		const baseURL = this.props.baseURL;
 		const response = await axios(`${baseURL}/quizzes`);
 		const data = response.data;
-		console.log(data);
+		// console.log(data);
 
 		// Sort quizzes by most recent at the start of the array
 		data.sort(function(a, b) {
