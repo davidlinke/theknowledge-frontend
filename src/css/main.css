@@ -389,26 +389,36 @@ select {
 	background-color: var(--green);
 }
 
-.card img {
-	width: 100%;
-}
-
 .card {
 	width: 200px;
-	background: var(--medium-color);
+	margin: 1rem;
+	/* padding: 0; */
 }
 
-.allQuizzesContainer {
+.subCard {
+	cursor: pointer;
 }
 
 .cardContainer {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	flex: none;
-	justify-content: space-evenly;
+	/* flex: none; */
+	justify-content: center;
 	align-items: flex-start;
 	align-content: flex-start;
+}
+
+.quizCardImage {
+	width: 200px;
+	height: 200px;
+	/* padding: 0;
+	margin: 0; */
+}
+
+.quizCardTitle {
+	padding: 1rem 0.5rem;
+	margin: 0;
 }
 
 .questionImageDiv,
