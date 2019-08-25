@@ -601,4 +601,8 @@ select {
 		width: 100vw;
 		height: 100vw;
 	}
+
+	h2 {
+		padding: 0 2rem;
+	}
 }
