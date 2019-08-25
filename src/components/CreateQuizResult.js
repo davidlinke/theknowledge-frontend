@@ -36,13 +36,14 @@ class CreateQuizResult extends React.Component {
 						required
 					/>
 					<input
-						type='text'
+						type='url'
 						id='resultImage'
 						name='resultImage'
 						placeholder='Result Image URL'
 						onChange={event =>
 							this.handleChange(event, this.props.resultNumber)
 						}
+						required
 					/>
 				</div>
 			</>

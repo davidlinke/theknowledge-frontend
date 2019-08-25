@@ -61,7 +61,7 @@ class CreateQuizQuestion extends React.Component {
 						required
 					/>
 					<input
-						type='text'
+						type='url'
 						id='answer1img'
 						name='answer1img'
 						placeholder='Answer 1 Image URL'
@@ -94,7 +94,7 @@ class CreateQuizQuestion extends React.Component {
 						}
 					/>
 					<input
-						type='text'
+						type='url'
 						id='answer2img'
 						name='answer2img'
 						placeholder='Answer 2 Image URL'
@@ -127,7 +127,7 @@ class CreateQuizQuestion extends React.Component {
 						}
 					/>
 					<input
-						type='text'
+						type='url'
 						id='answer3img'
 						name='answer3img'
 						placeholder='Answer 3 Image URL'
@@ -160,7 +160,7 @@ class CreateQuizQuestion extends React.Component {
 						}
 					/>
 					<input
-						type='text'
+						type='url'
 						id='answer4img'
 						name='answer4img'
 						placeholder='Answer 4 Image URL'

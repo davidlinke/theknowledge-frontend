@@ -44,6 +44,8 @@ class CreateQuiz extends React.Component {
 		console.log(response);
 
 		this.setState({});
+
+		this.props.finishCreate();
 	}
 
 	handleChange(event) {
@@ -181,7 +183,7 @@ class CreateQuiz extends React.Component {
 							required
 						/>
 						<input
-							type='text'
+							type='url'
 							id='quizImage'
 							name='quizImage'
 							placeholder='Image URL'

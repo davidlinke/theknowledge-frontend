@@ -248,7 +248,12 @@ class App extends React.Component {
 				</Modal>
 				<div className='mainBodyParent'>
 					<div className='mainBody'>
-						{this.state.createQuiz && <CreateQuiz baseURL={baseURL} />}
+						{this.state.createQuiz && (
+							<CreateQuiz
+								baseURL={baseURL}
+								finishCreate={this.hideCreateQuiz}
+							/>
+						)}
 						{this.state.showQuizzes && (
 							<ShowAllQuizzes
 								baseURL={baseURL}
@@ -260,11 +265,15 @@ class App extends React.Component {
 							/>
 						)}
 						{this.state.currentQuizId && (
-							<TakeQuiz baseURL={baseURL} quizID={this.state.currentQuizId} />
+							<TakeQuiz
+								baseURL={baseURL}
+								quizID={this.state.currentQuizId}
+								stopQuiz={this.finishTakingQuiz}
+							/>
 						)}
-						<footer>Created by David &amp; the Peter's</footer>
 					</div>
 				</div>
+				<footer>Created by David &amp; the Peter's</footer>
 			</div>
 		);
 	}

@@ -4,6 +4,7 @@
 :root {
 	--main-color: #06d6a0;
 	--dark-color: #222222;
+	--medium-color: #e9e9e9;
 	--light-color: #fcfcfc;
 	--blue: #26547c;
 	--red: #ef476f;
@@ -17,7 +18,7 @@
 }
 
 body {
-	background-color: var(--light-color);
+	background-color: var(--medium-color);
 }
 
 footer {
@@ -40,26 +41,34 @@ button:active {
 	color: var(--blue);
 }
 
-.quizButton {
-	background-color: var(--light-color);
-	color: var(--green);
+.quizButton,
+.finishQuizButton {
 	font-size: 1.2rem;
 	padding: 1rem;
+	background-color: var(--light-color);
+	color: var(--green);
 	box-shadow: 0px 0px 0px 4px;
 }
 
-.quizButton:active {
+.finishQuizButton {
+	margin: 2rem 0;
+}
+
+.quizButton:active,
+.finishQuizButton:active {
 	background-color: var(--green);
 	color: var(--light-color);
+	box-shadow: 0 0 0 0;
 }
 
 .mainBodyParent {
 	margin: 0 auto;
+	background-color: var(--light-color);
 }
 
 .mainBody {
-	margin: 2rem auto;
-	padding: 0 5%;
+	margin: 0 auto;
+	padding: 4rem 5%;
 	max-width: 1000px;
 }
 
@@ -386,7 +395,7 @@ select {
 
 .card {
 	width: 200px;
-	background: grey;
+	background: var(--medium-color);
 }
 
 .allQuizzesContainer {
@@ -402,12 +411,13 @@ select {
 	align-content: flex-start;
 }
 
-.questionImageDiv {
+.questionImageDiv,
+.resultsImageDiv {
 	margin: 0 auto;
 	width: 50vw;
-	height: 30vw;
+	height: 50vw;
 	max-width: 800px;
-	max-height: 480px;
+	max-height: 800px;
 	display: flex;
 	justify-content: center;
 	align-content: center;
@@ -416,7 +426,60 @@ select {
 	align-items: center;
 }
 
-.quizQuestionCaption {
+.resultsImageDiv {
+	justify-content: space-between;
+	width: 50vw;
+	height: 50vw;
+	max-height: 800px;
+}
+
+.quizQuestionCaption,
+.resultTitle {
 	color: var(--light-color);
 	text-shadow: 2px 2px 3px var(--dark-color);
+}
+
+.resultTitle {
+	padding-top: 2rem;
+}
+
+.resultCaption {
+	color: var(--light-color);
+	text-shadow: 2px 2px 3px var(--dark-color);
+	padding-bottom: 2rem;
+	margin-bottom: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+	.innerSliderDiv {
+		padding: 1rem 0;
+		margin: 4rem 0;
+	}
+	.questionImageDiv,
+	.resultsImageDiv {
+		width: 80vw;
+		height: 80vw;
+	}
+}
+
+@media only screen and (max-width: 650px) {
+	.mainBody {
+		padding: 3rem 0;
+	}
+
+	.answersRow {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.innerSliderDiv {
+		padding: 1rem 0;
+		margin: 2rem 0;
+	}
+
+	.questionImageDiv,
+	.resultsImageDiv {
+		width: 100vw;
+		height: 100vw;
+	}
 }
