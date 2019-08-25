@@ -1,5 +1,5 @@
 import React from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import Slider from 'react-slick';
 
 class TakeQuiz extends React.Component {
@@ -21,12 +21,15 @@ class TakeQuiz extends React.Component {
 		);
 		this.getResult = this.getResult.bind(this);
 		this.getQuizCreatorDisplayName = this.getQuizCreatorDisplayName.bind(this);
+		this.quizCountUpdate = this.quizCountUpdate.bind(this);
 	}
 
 	async getQuiz(id) {
-		const baseURL = this.props.baseURL;
-		const response = await Axios(`${baseURL}/quizzes/${this.props.quizID}`);
+		const response = await axios(
+			`${this.props.baseURL}/quizzes/${this.props.quizID}`
+		);
 		const data = response.data;
+		console.log(data);
 		this.setState({
 			quiz: data
 		});
@@ -38,6 +41,14 @@ class TakeQuiz extends React.Component {
 		this.getQuiz();
 	}
 
+	componentDidUpdate() {
+		// RUN ONLY IF DONE WITH LAST QUESTION
+		this.state.resultsCount.length > 0 &&
+			this.state.resultsCount.reduce((x, y) => x + y) ===
+				this.state.quiz.questions.length &&
+			this.quizCountUpdate();
+	}
+
 	nextSlide() {
 		this.refs.slider.slickNext();
 	}
@@ -47,11 +58,18 @@ class TakeQuiz extends React.Component {
 	}
 
 	async getQuizCreatorDisplayName(userid) {
-		const baseURL = this.props.baseURL;
-		const response = await Axios(`${baseURL}/users/${userid}`);
+		const response = await axios(`${this.props.baseURL}/users/${userid}`);
 		this.setState({
 			quizCreatorDisplayName: response.data
 		});
+	}
+
+	async quizCountUpdate() {
+		const response = await axios.put(
+			`${this.props.baseURL}/quizzes/${this.state.quiz._id}`
+		);
+		console.log('QUIZ COUNT RESPONSE HERE');
+		console.log(response);
 	}
 
 	initializeResultsCountArray = resultsLength => {
@@ -275,8 +293,6 @@ class TakeQuiz extends React.Component {
 					<div>
 						{this.state.quiz &&
 							this.state.resultsCount.length > 0 &&
-							// this.state.resultsCount.reduce((x, y) => x + y) ===
-							// 	this.state.quiz.questions.length &&
 							this.getResult()}
 						<button className='finishQuizButton' onClick={this.props.stopQuiz}>
 							Back To Quizzes
