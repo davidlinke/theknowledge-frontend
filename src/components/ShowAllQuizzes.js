@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import moment from 'moment';
 
 class ShowAllQuizzes extends React.Component {
 	constructor(props) {
@@ -14,10 +15,19 @@ class ShowAllQuizzes extends React.Component {
 	}
 
 	async getQuizzes() {
-		console.log('Getting quizzes');
 		const baseURL = this.props.baseURL;
 		const response = await axios(`${baseURL}/quizzes`);
 		const data = response.data;
+
+		// Sort quizzes by most recent at the start of the array
+		data.sort(function(a, b) {
+			let keyA = new Date(a.createdAt);
+			let keyB = new Date(b.createdAt);
+			if (keyA > keyB) return -1;
+			if (keyA < keyB) return 1;
+			return 0;
+		});
+
 		this.setState({
 			quizzes: data
 		});
@@ -53,17 +63,18 @@ class ShowAllQuizzes extends React.Component {
 				<div className='cardContainer'>
 					{this.state.quizzes.map((quiz, index) => {
 						return (
-							<div
-								style={{
-									backgroundColor: this.getRandomColor()
-								}}
-								className='card'
-								key={'quizCard' + index}
-							>
+							<div className='card' key={'quizCard' + index}>
 								<div
 									className='subCard'
 									onClick={() => this.props.takeQuiz(quiz.id)}
+									style={{
+										backgroundColor: this.getRandomColor()
+									}}
 								>
+									<p className='quizCardTime'>
+										{' '}
+										{moment(quiz.createdAt).format('M/D/YY')}{' '}
+									</p>
 									<h3 className='quizCardTitle'> {quiz.name} </h3>
 									<div
 										className='quizCardImage'
@@ -74,11 +85,13 @@ class ShowAllQuizzes extends React.Component {
 											backgroundPosition: '50% 50%'
 										}}
 									></div>
-									<p> {quiz.updatedAt} </p>
 								</div>
 
 								{this.props.currentUser === quiz.createdBy ? (
-									<button onClick={() => this.deleteAQuiz(quiz.id)}>
+									<button
+										className='quizCardButton quizCardButtonDelete'
+										onClick={() => this.deleteAQuiz(quiz.id)}
+									>
 										Delete
 									</button>
 								) : null}

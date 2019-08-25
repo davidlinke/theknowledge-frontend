@@ -273,7 +273,32 @@ class App extends React.Component {
 						)}
 					</div>
 				</div>
-				<footer>Created by David &amp; the Peter's</footer>
+				<footer>
+					Created by{' '}
+					<a
+						href='https://github.com/peterfuoco'
+						target='_blank'
+						rel='noopener noreferrer'
+					>
+						Peter
+					</a>
+					,{' '}
+					<a
+						href='https://github.com/pdcoding'
+						target='_blank'
+						rel='noopener noreferrer'
+					>
+						Peter
+					</a>{' '}
+					&amp;{' '}
+					<a
+						href='https://github.com/davidlinke'
+						target='_blank'
+						rel='noopener noreferrer'
+					>
+						David
+					</a>
+				</footer>
 			</div>
 		);
 	}
