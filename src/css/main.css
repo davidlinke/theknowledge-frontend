@@ -425,15 +425,30 @@ select {
 	color: var(--light-color);
 }
 
-.quizCardTime {
+.quizCardBadgeContainer {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+}
+
+.quizCardBadge {
+	display: inline-block;
 	margin: 0;
 	padding: 0;
-	padding: 0.4rem 0.4rem 0 0;
 	font-weight: 400;
 	font-size: 0.8rem;
-	text-align: right;
 	font-style: italic;
 	color: var(--light-color);
+}
+
+.quizCardTime {
+	text-align: right;
+	padding: 0.4rem 0.4rem 0 0;
+}
+
+.quizCardCount {
+	text-align: left;
+	padding: 0.4rem 0 0 0.4rem;
 }
 
 .quizCardButton {
