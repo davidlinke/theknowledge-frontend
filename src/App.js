@@ -99,7 +99,7 @@ class App extends React.Component {
 
 	async handleLogOut(event) {
 		this.setState({ currentUser: null });
-		const res = await axios.delete(`${baseURL}/sessions`, {});
+		await axios.delete(`${baseURL}/sessions`, {});
 	}
 
 	showCreateQuiz = () => {

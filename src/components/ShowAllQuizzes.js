@@ -51,24 +51,35 @@ class ShowAllQuizzes extends React.Component {
 			<div className='allQuizzesContainer'>
 				<h2>Check out quizzes better than BuzzFeed's and create your own!</h2>
 				<div className='cardContainer'>
-					{this.state.quizzes.map(quiz => {
+					{this.state.quizzes.map((quiz, index) => {
 						return (
 							<div
 								style={{
 									backgroundColor: this.getRandomColor()
 								}}
 								className='card'
+								key={'quizCard' + index}
 							>
-								<h5> {quiz.name} </h5>
-								<p> {quiz.caption} </p>
-								<img src={quiz.image} />
-								<p> {quiz.updatedAt} </p>
-								<button onClick={() => this.props.takeQuiz(quiz.id)}>
-									Take {quiz.name}
-								</button>
+								<div
+									className='subCard'
+									onClick={() => this.props.takeQuiz(quiz.id)}
+								>
+									<h3 className='quizCardTitle'> {quiz.name} </h3>
+									<div
+										className='quizCardImage'
+										style={{
+											backgroundImage: quiz.image && `url(${quiz.image})`,
+											backgroundSize: 'cover',
+											backgroundRepeat: 'no-repeat',
+											backgroundPosition: '50% 50%'
+										}}
+									></div>
+									<p> {quiz.updatedAt} </p>
+								</div>
+
 								{this.props.currentUser === quiz.createdBy ? (
 									<button onClick={() => this.deleteAQuiz(quiz.id)}>
-										Delete {quiz.name}
+										Delete
 									</button>
 								) : null}
 							</div>
