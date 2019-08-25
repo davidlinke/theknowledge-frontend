@@ -7,7 +7,8 @@ class TakeQuiz extends React.Component {
 		super(props);
 		this.state = {
 			quiz: null,
-			resultsCount: []
+			resultsCount: [],
+			minImageURLLength: 11
 		};
 		this.getQuiz = this.getQuiz.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
@@ -19,11 +20,12 @@ class TakeQuiz extends React.Component {
 		);
 		this.getResult = this.getResult.bind(this);
 	}
+
 	async getQuiz(id) {
 		const baseURL = this.props.baseURL;
 		const response = await Axios(`${baseURL}/quizzes/${this.props.quizID}`);
 		const data = response.data;
-		console.log(data);
+		// console.log(data);
 		this.setState({
 			quiz: data
 		});
@@ -53,10 +55,10 @@ class TakeQuiz extends React.Component {
 	};
 
 	answerQuestion = resultIndex => {
-		console.log('Result Index is: ' + resultIndex);
+		// console.log('Result Index is: ' + resultIndex);
 		let resultsCountTemp = this.state.resultsCount;
 		resultsCountTemp[resultIndex] += 1;
-		console.log(resultsCountTemp);
+		// console.log(resultsCountTemp);
 		this.setState({
 			resultsCount: resultsCountTemp
 		});
@@ -67,8 +69,8 @@ class TakeQuiz extends React.Component {
 		const maxCount = Math.max(...this.state.resultsCount);
 		const resultIndexPosition = this.state.resultsCount.indexOf(maxCount);
 
-		console.log('Max Count is: ' + maxCount);
-		console.log('Index position of result is: ' + resultIndexPosition);
+		// console.log('Max Count is: ' + maxCount);
+		// console.log('Index position of result is: ' + resultIndexPosition);
 
 		return resultIndexPosition;
 	};
@@ -78,21 +80,37 @@ class TakeQuiz extends React.Component {
 		if (resultPosition === -1) {
 			return <></>;
 		} else {
-			console.log('Result Position ' + resultPosition);
-			console.log(this.state.quiz.results[resultPosition].result);
+			// console.log('Result Position ' + resultPosition);
+			// console.log(this.state.quiz.results[resultPosition].result);
 			const resultContent = [];
 			resultContent.push(
-				<h4>{this.state.quiz.results[resultPosition].result}</h4>
+				<h2 className='resultTitle'>
+					{this.state.quiz.results[resultPosition].result}
+				</h2>
 			);
 			resultContent.push(
-				<h5>{this.state.quiz.results[resultPosition].resultCaption}</h5>
+				<h3 className='resultCaption'>
+					{this.state.quiz.results[resultPosition].resultCaption}
+				</h3>
 			);
-			if (this.state.quiz.results[resultPosition].resultImage) {
-				resultContent.push(
-					<img src={this.state.quiz.results[resultPosition].resultImage} />
-				);
-			}
-			return <>{resultContent}</>;
+			return (
+				<div
+					className='resultsImageDiv'
+					style={{
+						backgroundImage:
+							this.state.quiz.results[resultPosition].resultImage &&
+							this.state.quiz.results[resultPosition].resultImage.length >
+								this.state.minImageURLLength
+								? `url(${this.state.quiz.results[resultPosition].resultImage})`
+								: 'none',
+						backgroundSize: 'cover',
+						backgroundRepeat: 'no-repeat',
+						backgroundPosition: '50% 50%'
+					}}
+				>
+					{resultContent}
+				</div>
+			);
 		}
 	};
 
@@ -111,8 +129,6 @@ class TakeQuiz extends React.Component {
 			slidesToShow: 1,
 			slidesToScroll: 1
 		};
-
-		const minImageURLLength = 11;
 
 		return (
 			<div>
@@ -134,7 +150,7 @@ class TakeQuiz extends React.Component {
 								className='questionImageDiv'
 								style={{
 									backgroundImage:
-										this.state.quiz.image.length > minImageURLLength
+										this.state.quiz.image.length > this.state.minImageURLLength
 											? `url(${this.state.quiz.image})`
 											: 'none',
 									backgroundSize: 'cover',
@@ -165,7 +181,9 @@ class TakeQuiz extends React.Component {
 												}
 												style={{
 													backgroundImage:
-														question.answer1img.length > minImageURLLength
+														question.answer1img &&
+														question.answer1img.length >
+															this.state.minImageURLLength
 															? `url(${question.answer1img})`
 															: 'none',
 													backgroundSize: 'cover',
@@ -182,7 +200,9 @@ class TakeQuiz extends React.Component {
 												}
 												style={{
 													backgroundImage:
-														question.answer2img.length > minImageURLLength
+														question.answer2img &&
+														question.answer2img.length >
+															this.state.minImageURLLength
 															? `url(${question.answer2img})`
 															: 'none',
 													backgroundSize: 'cover',
@@ -201,7 +221,9 @@ class TakeQuiz extends React.Component {
 												}
 												style={{
 													backgroundImage:
-														question.answer3img.length > minImageURLLength
+														question.answer3img &&
+														question.answer3img.length >
+															this.state.minImageURLLength
 															? `url(${question.answer3img})`
 															: 'none',
 													backgroundSize: 'cover',
@@ -218,7 +240,9 @@ class TakeQuiz extends React.Component {
 												}
 												style={{
 													backgroundImage:
-														question.answer4img.length > minImageURLLength
+														question.answer4img &&
+														question.answer4img.length >
+															this.state.minImageURLLength
 															? `url(${question.answer4img})`
 															: 'none',
 													backgroundSize: 'cover',
@@ -233,7 +257,12 @@ class TakeQuiz extends React.Component {
 								</div>
 							);
 						})}
-					<div>{this.state.quiz && this.getResult()}</div>
+					<div>
+						{this.state.quiz && this.getResult()}
+						<button className='finishQuizButton' onClick={this.props.stopQuiz}>
+							Back To Quizzes
+						</button>
+					</div>
 				</Slider>
 			</div>
 		);
