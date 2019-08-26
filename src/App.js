@@ -5,9 +5,14 @@ import Cookies from 'js-cookie';
 import CreateQuiz from './components/CreateQuiz.js';
 import ShowAllQuizzes from './components/ShowAllQuizzes.js';
 import TakeQuiz from './components/TakeQuiz.js';
+require('dotenv').config();
 axios.defaults.withCredentials = true;
 
-const baseURL = 'http://localhost:3003';
+let baseURL = 'https://theknowledge.herokuapp.com/';
+
+if (process.env.NODE_ENV === 'development') {
+	baseURL = 'http://localhost:3003';
+}
 
 class App extends React.Component {
 	constructor(props) {
