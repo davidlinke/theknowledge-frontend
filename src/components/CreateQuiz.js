@@ -32,18 +32,13 @@ class CreateQuiz extends React.Component {
 	async handleSubmit(event) {
 		event.preventDefault();
 
-		const response = await axios.post(`${this.props.baseURL}/quizzes`, {
+		await axios.post(`${this.props.baseURL}/quizzes`, {
 			name: this.state.quizName,
 			caption: this.state.quizCaption,
 			image: this.state.quizImage,
 			questions: this.state.questions,
 			results: this.state.results
 		});
-
-		console.log('CREATE QUIZ RESPONSE BELOW');
-		console.log(response);
-
-		this.setState({});
 
 		this.props.finishCreate();
 	}
@@ -202,12 +197,12 @@ class CreateQuiz extends React.Component {
 					</p>
 					{this.showResults()}
 					<div className='formButtonsContainer'>
-						<button class='createFormButton' onClick={this.addResult}>
+						<button className='createFormButton' onClick={this.addResult}>
 							Add Another Result
 						</button>
 						{this.state.resultsCount > 1 && (
 							<button
-								class='createFormButton removeButtonRed'
+								className='createFormButton removeButtonRed'
 								onClick={this.removeResult}
 							>
 								Remove Result
@@ -224,12 +219,12 @@ class CreateQuiz extends React.Component {
 					</p>
 					{this.showQuestions()}
 					<div className='formButtonsContainer'>
-						<button class='createFormButton' onClick={this.addQuestion}>
+						<button className='createFormButton' onClick={this.addQuestion}>
 							Add Another Question
 						</button>
 						{this.state.questionsCount > 1 && (
 							<button
-								class='createFormButton removeButtonYellow'
+								className='createFormButton removeButtonYellow'
 								onClick={this.removeQuestion}
 							>
 								Remove Question
@@ -238,7 +233,11 @@ class CreateQuiz extends React.Component {
 					</div>
 				</div>
 				<div className='createQuizButtonContainer'>
-					<input class='createQuizButton' type='submit' value='Create Quiz!' />
+					<input
+						className='createQuizButton'
+						type='submit'
+						value='Create Quiz!'
+					/>
 				</div>
 			</form>
 		);

@@ -18,7 +18,6 @@ class ShowAllQuizzes extends React.Component {
 		const baseURL = this.props.baseURL;
 		const response = await axios(`${baseURL}/quizzes`);
 		const data = response.data;
-		// console.log(data);
 
 		// Sort quizzes by most recent at the start of the array
 		data.sort(function(a, b) {
@@ -37,7 +36,6 @@ class ShowAllQuizzes extends React.Component {
 	async deleteAQuiz(id) {
 		const baseURL = this.props.baseURL;
 		await axios.delete(`${baseURL}/quizzes/${id}`);
-		console.log('click');
 		this.getQuizzes();
 	}
 
