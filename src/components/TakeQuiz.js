@@ -1,5 +1,5 @@
 import React from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import Slider from 'react-slick';
 
 class TakeQuiz extends React.Component {
@@ -7,7 +7,9 @@ class TakeQuiz extends React.Component {
 		super(props);
 		this.state = {
 			quiz: null,
-			resultsCount: []
+			resultsCount: [],
+			minImageURLLength: 11,
+			quizCreatorDisplayName: ''
 		};
 		this.getQuiz = this.getQuiz.bind(this);
 		this.nextSlide = this.nextSlide.bind(this);
@@ -18,20 +20,33 @@ class TakeQuiz extends React.Component {
 			this
 		);
 		this.getResult = this.getResult.bind(this);
+		this.getQuizCreatorDisplayName = this.getQuizCreatorDisplayName.bind(this);
+		this.quizCountUpdate = this.quizCountUpdate.bind(this);
 	}
+
 	async getQuiz(id) {
-		const baseURL = this.props.baseURL;
-		const response = await Axios(`${baseURL}/quizzes/${this.props.quizID}`);
+		const response = await axios(
+			`${this.props.baseURL}/quizzes/${this.props.quizID}`
+		);
 		const data = response.data;
-		console.log(data);
+		// console.log(data);
 		this.setState({
 			quiz: data
 		});
 		this.initializeResultsCountArray(data.results.length);
+		this.getQuizCreatorDisplayName(data.createdBy);
 	}
 
 	componentDidMount() {
 		this.getQuiz();
+	}
+
+	componentDidUpdate() {
+		// RUN ONLY IF DONE WITH LAST QUESTION
+		this.state.resultsCount.length > 0 &&
+			this.state.resultsCount.reduce((x, y) => x + y) ===
+				this.state.quiz.questions.length &&
+			this.quizCountUpdate();
 	}
 
 	nextSlide() {
@@ -40,6 +55,17 @@ class TakeQuiz extends React.Component {
 
 	previousSlide() {
 		this.refs.slider.slickPrev();
+	}
+
+	async getQuizCreatorDisplayName(userid) {
+		const response = await axios(`${this.props.baseURL}/users/${userid}`);
+		this.setState({
+			quizCreatorDisplayName: response.data
+		});
+	}
+
+	async quizCountUpdate() {
+		await axios.put(`${this.props.baseURL}/quizzes/${this.state.quiz._id}`);
 	}
 
 	initializeResultsCountArray = resultsLength => {
@@ -53,10 +79,8 @@ class TakeQuiz extends React.Component {
 	};
 
 	answerQuestion = resultIndex => {
-		console.log('Result Index is: ' + resultIndex);
 		let resultsCountTemp = this.state.resultsCount;
 		resultsCountTemp[resultIndex] += 1;
-		console.log(resultsCountTemp);
 		this.setState({
 			resultsCount: resultsCountTemp
 		});
@@ -66,10 +90,6 @@ class TakeQuiz extends React.Component {
 	calculateResult = () => {
 		const maxCount = Math.max(...this.state.resultsCount);
 		const resultIndexPosition = this.state.resultsCount.indexOf(maxCount);
-
-		console.log('Max Count is: ' + maxCount);
-		console.log('Index position of result is: ' + resultIndexPosition);
-
 		return resultIndexPosition;
 	};
 
@@ -78,21 +98,43 @@ class TakeQuiz extends React.Component {
 		if (resultPosition === -1) {
 			return <></>;
 		} else {
-			console.log('Result Position ' + resultPosition);
-			console.log(this.state.quiz.results[resultPosition].result);
+			// console.log('Result Position ' + resultPosition);
+			// console.log(this.state.quiz.results[resultPosition].result);
+			// console.log(this.state.resultsCount);
+			// console.log(this.state.quiz.results[resultPosition].resultImage);
+			// console.log(this.state.quiz.results[resultPosition].resultImage.length);
+
 			const resultContent = [];
 			resultContent.push(
-				<h4>{this.state.quiz.results[resultPosition].result}</h4>
+				<h2 className='resultTitle' key='resultTitle'>
+					{this.state.quiz.results[resultPosition].result}
+				</h2>
 			);
 			resultContent.push(
-				<h5>{this.state.quiz.results[resultPosition].resultCaption}</h5>
+				<h3 className='resultCaption' key='resultCaption'>
+					{this.state.quiz.results[resultPosition].resultCaption}
+				</h3>
 			);
-			if (this.state.quiz.results[resultPosition].resultImage) {
-				resultContent.push(
-					<img src={this.state.quiz.results[resultPosition].resultImage} />
-				);
-			}
-			return <>{resultContent}</>;
+
+			return (
+				<div
+					className='resultsImageDiv'
+					key='resultsImageDiv'
+					style={{
+						backgroundImage:
+							this.state.quiz.results[resultPosition].resultImage &&
+							this.state.quiz.results[resultPosition].resultImage.length >
+								this.state.minImageURLLength
+								? `url(${this.state.quiz.results[resultPosition].resultImage})`
+								: 'none',
+						backgroundSize: 'cover',
+						backgroundRepeat: 'no-repeat',
+						backgroundPosition: '50% 50%'
+					}}
+				>
+					{resultContent}
+				</div>
+			);
 		}
 	};
 
@@ -111,57 +153,146 @@ class TakeQuiz extends React.Component {
 			slidesToShow: 1,
 			slidesToScroll: 1
 		};
+
 		return (
 			<div>
-				{this.state.quiz && <h2>{this.state.quiz.name}</h2>}
+				{this.state.quiz && (
+					<>
+						<h3>
+							<span className='h3LessEmphasis'>Quiz:</span>
+							{this.state.quiz.name}
+						</h3>
+						<h5 className='createdBy'>
+							By <span>{this.state.quizCreatorDisplayName}</span>
+						</h5>
+					</>
+				)}
 				<Slider ref='slider' {...settings}>
 					{!this.state.quiz && (
 						<div>
-							<h4>Loading Quiz!</h4>
+							<h3>Loading Quiz!</h3>
 						</div>
 					)}
 					{this.state.quiz && (
 						<div>
-							<h4>{this.state.quiz.caption}</h4>
-							<img src={this.state.quiz.image} width='400px' />
-							<button onClick={this.nextSlide}>Get Started</button>
+							<div
+								className='questionImageDiv'
+								style={{
+									backgroundImage:
+										this.state.quiz.image.length > this.state.minImageURLLength
+											? `url(${this.state.quiz.image})`
+											: 'none',
+									backgroundSize: 'cover',
+									backgroundRepeat: 'no-repeat',
+									backgroundPosition: '50% 50%'
+								}}
+							>
+								<h2 className='quizQuestionCaption'>
+									{this.state.quiz.caption}
+								</h2>
+								<button className='quizButton' onClick={this.nextSlide}>
+									Get Started
+								</button>
+							</div>
 						</div>
 					)}
 					{this.state.quiz &&
-						this.state.quiz.questions.map(question => {
+						this.state.quiz.questions.map((question, index) => {
 							return (
-								<div>
-									<h5>{question.question}</h5>
-									<div
-										className='answer answer1'
-										onClick={() => this.answerQuestion(question.answer1result)}
-									>
-										{question.answer1}
-									</div>
-									<div
-										className='answer answer2'
-										onClick={() => this.answerQuestion(question.answer2result)}
-									>
-										{question.answer2}
-									</div>
-									<div
-										className='answer answer3'
-										onClick={() => this.answerQuestion(question.answer3result)}
-									>
-										{question.answer3}
-									</div>
-									<div
-										className='answer answer4'
-										onClick={() => this.answerQuestion(question.answer4result)}
-									>
-										{question.answer4}
+								<div key={'quizQuestion' + index}>
+									<h2>{question.question}</h2>
+									<div className='answersContainer'>
+										<div className='answersRow'>
+											<div
+												className='answer answer1'
+												onClick={() =>
+													this.answerQuestion(question.answer1result)
+												}
+												style={{
+													backgroundImage:
+														question.answer1img &&
+														question.answer1img.length >
+															this.state.minImageURLLength
+															? `url(${question.answer1img})`
+															: 'none',
+													backgroundSize: 'cover',
+													backgroundRepeat: 'no-repeat',
+													backgroundPosition: '50% 50%'
+												}}
+											>
+												<p className='answerText'>{question.answer1}</p>
+											</div>
+											<div
+												className='answer answer2'
+												onClick={() =>
+													this.answerQuestion(question.answer2result)
+												}
+												style={{
+													backgroundImage:
+														question.answer2img &&
+														question.answer2img.length >
+															this.state.minImageURLLength
+															? `url(${question.answer2img})`
+															: 'none',
+													backgroundSize: 'cover',
+													backgroundRepeat: 'no-repeat',
+													backgroundPosition: '50% 50%'
+												}}
+											>
+												<p className='answerText'>{question.answer2}</p>
+											</div>
+										</div>
+										<div className='answersRow'>
+											<div
+												className='answer answer3'
+												onClick={() =>
+													this.answerQuestion(question.answer3result)
+												}
+												style={{
+													backgroundImage:
+														question.answer3img &&
+														question.answer3img.length >
+															this.state.minImageURLLength
+															? `url(${question.answer3img})`
+															: 'none',
+													backgroundSize: 'cover',
+													backgroundRepeat: 'no-repeat',
+													backgroundPosition: '50% 50%'
+												}}
+											>
+												<p className='answerText'>{question.answer3}</p>
+											</div>
+											<div
+												className='answer answer4'
+												onClick={() =>
+													this.answerQuestion(question.answer4result)
+												}
+												style={{
+													backgroundImage:
+														question.answer4img &&
+														question.answer4img.length >
+															this.state.minImageURLLength
+															? `url(${question.answer4img})`
+															: 'none',
+													backgroundSize: 'cover',
+													backgroundRepeat: 'no-repeat',
+													backgroundPosition: '50% 50%'
+												}}
+											>
+												<p className='answerText'>{question.answer4}</p>
+											</div>
+										</div>
 									</div>
 								</div>
 							);
 						})}
 					<div>
-						<h4>Results</h4>
-						{this.state.quiz && this.getResult()}
+						{this.state.quiz &&
+							this.state.resultsCount.length > 0 &&
+							this.getResult()}
+						<button className='finishQuizButton' onClick={this.props.stopQuiz}>
+							Back To Quizzes
+						</button>
 					</div>
 				</Slider>
 			</div>

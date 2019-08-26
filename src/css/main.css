@@ -4,6 +4,7 @@
 :root {
 	--main-color: #06d6a0;
 	--dark-color: #222222;
+	--medium-color: #e9e9e9;
 	--light-color: #fcfcfc;
 	--blue: #26547c;
 	--red: #ef476f;
@@ -17,7 +18,7 @@
 }
 
 body {
-	background-color: var(--light-color);
+	background-color: var(--medium-color);
 }
 
 footer {
@@ -25,29 +26,70 @@ footer {
 	margin: 3rem 0;
 }
 
-button {
+button,
+input[type='submit'] {
 	cursor: pointer;
+	padding: 0.4rem 0.7rem;
+	background-color: var(--blue);
+	color: var(--light-color);
+	border: none;
+	font-weight: 400;
+	font-size: 0.8rem;
+}
+
+button:active {
+	background-color: var(--light-color);
+	color: var(--blue);
+}
+
+.quizButton,
+.finishQuizButton {
+	font-size: 1.2rem;
+	padding: 1rem;
+	background-color: var(--light-color);
+	color: var(--green);
+	box-shadow: 0px 0px 0px 4px;
+}
+
+.finishQuizButton {
+	margin: 2rem 0;
+}
+
+.quizButton:active,
+.finishQuizButton:active {
+	background-color: var(--green);
+	color: var(--light-color);
+	box-shadow: 0 0 0 0;
 }
 
 .mainBodyParent {
 	margin: 0 auto;
+	background-color: var(--light-color);
 }
+
 .mainBody {
-	margin: 2rem auto;
-	padding: 0 5%;
+	margin: 0 auto;
+	padding: 4rem 5%;
 	max-width: 1000px;
 }
 
 a,
 a:visited {
 	color: var(--light-color);
-}
-
-a:hover {
+	cursor: pointer;
+	text-decoration: none;
 }
 
 a:active {
 	color: var(--main-color);
+}
+
+footer a {
+	color: var(--green) !important;
+}
+
+footer a:active {
+	color: var(--dark-color) !important;
 }
 
 button:focus,
@@ -113,6 +155,14 @@ h3 {
 	text-transform: uppercase;
 }
 
+.h3LessEmphasis {
+	font-family: 'Oswald', sans-serif;
+	font-weight: 200;
+	color: var(--blue);
+	font-style: italic;
+	padding-right: 0.5rem;
+}
+
 h4 {
 	margin-top: 2rem;
 	font-weight: 600;
@@ -120,6 +170,17 @@ h4 {
 
 h5 {
 	font-weight: 300;
+}
+
+.createdBy {
+	text-align: center;
+	text-transform: capitalize;
+	color: var(--blue);
+}
+
+.createdBy span {
+	font-family: 'Oswald', sans-serif;
+	color: var(--dark-color);
 }
 
 p {
@@ -136,11 +197,11 @@ p {
 }
 
 .closeModal {
-	background-color: var(--light-color);
-	color: var(--dark-color);
+	background-color: var(--red);
+	color: var(--light-color);
 	border: none;
 	position: fixed;
-	top: 22%;
+	top: 32%;
 	right: 22%;
 	text-transform: uppercase;
 	font-family: 'Oswald', sans-serif;
@@ -151,7 +212,6 @@ p {
 }
 
 .headerButton {
-	/* display: inline-block; */
 	margin: 0 1rem;
 	padding: 0.4rem 0.7rem;
 	background-color: var(--blue);
@@ -183,16 +243,15 @@ p {
 
 .modal {
 	position: absolute;
-	top: 20%;
+	top: 30%;
 	left: 20%;
 	right: 20%;
-	bottom: 20%;
+	bottom: 30%;
 	border: 1px solid var(--dark-color);
-	background: var(--light-color);
+	background: var(--medium-color);
 	overflow: auto;
 	-webkit-overflow-scrolling: 'touch';
 	outline: none;
-	/* border-radius: 4px; */
 	padding: 20px;
 }
 
@@ -207,29 +266,11 @@ p {
 
 input {
 	box-sizing: border-box;
-	/* width: 25%; */
 	height: 2.5rem;
-	/* margin: 0 1%; */
 	padding: 0.5em;
 	font-size: 0.8rem;
 	border: none;
 	flex-grow: 1;
-}
-
-input[type='submit'] {
-	width: 15%;
-	cursor: pointer;
-	background: none;
-	border: none;
-	/* color: var(--dark-color); */
-	/* background-color: var(--medium-color); */
-	text-transform: uppercase;
-	font-size: 0.8rem;
-	font-family: 'Oswald', sans-serif;
-}
-
-input[type='submit']:hover {
-	/* color: var(--white); */
 }
 
 .loginInput {
@@ -269,6 +310,21 @@ select {
 	margin-top: 2.5rem;
 }
 
+.modalInputRow {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+	margin: 0 -0.5rem;
+}
+
+.modalInputRow > input {
+	margin: 0.5rem 0.5rem;
+	width: 60%;
+}
+
 .createSection {
 	padding: 3%;
 	margin-bottom: 2rem;
@@ -286,20 +342,71 @@ select {
 	background-color: var(--red);
 }
 
+.formButtonsContainer {
+	text-align: center;
+}
+
+.createFormButton {
+	margin: 2rem 0.5rem 0 0.5rem;
+}
+
+.removeButtonRed {
+	background-color: var(--red);
+}
+
+.removeButtonYellow {
+	background-color: var(--yellow);
+}
+
+.createQuizButtonContainer {
+	text-align: center;
+}
+
+.createQuizButton {
+	font-size: 1.2rem !important;
+	background-color: var(--green) !important;
+	color: var(--light-color) !important;
+}
+
+.createQuizButton:active {
+	background-color: var(--medium-color) !important;
+}
+
 .innerSliderDiv {
 	text-align: center;
-	background: white;
 	padding: 1rem 5%;
+	margin: 4rem 0;
+}
+
+.answersRow {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
 }
 
 .answer {
-	display: block;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-direction: column;
 	cursor: pointer;
-	width: 50%;
+	width: 200px;
+	height: 200px;
 	padding: 1rem;
 	margin: 1rem;
+}
+
+.answer:active {
+	opacity: 0.5;
+}
+
+.answerText {
 	color: var(--light-color);
-	text-shadow: 2px 2px 4px var(--dark-color);
+	text-shadow: 2px 2px 3px var(--dark-color);
+	margin: 0;
+	padding: 0;
+	font-size: 2rem;
 }
 
 /* Need this to prevent weird highlighting upon carousel slide changes */
@@ -321,4 +428,181 @@ select {
 
 .answer4 {
 	background-color: var(--green);
+}
+
+.card {
+	width: 200px;
+	margin: 1rem;
+	text-align: center;
+}
+
+.subCard {
+	cursor: pointer;
+}
+
+.cardContainer {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+	align-content: flex-start;
+}
+
+.quizCardImage {
+	width: 200px;
+	height: 200px;
+}
+
+.quizCardTitle {
+	padding: 1rem 0.5rem;
+	margin: 0;
+	color: var(--light-color);
+}
+
+.quizCardBadgeContainer {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+}
+
+.quizCardBadge {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	font-weight: 400;
+	font-size: 0.8rem;
+	font-style: italic;
+	color: var(--light-color);
+}
+
+.quizCardTime {
+	text-align: right;
+	padding: 0.4rem 0.4rem 0 0;
+}
+
+.quizCardCount {
+	text-align: left;
+	padding: 0.4rem 0 0 0.4rem;
+}
+
+.quizCardButton {
+	margin-top: 0.5rem;
+}
+
+.quizCardButtonDelete {
+	background-color: var(--red);
+}
+
+.questionImageDiv,
+.resultsImageDiv {
+	margin: 0 auto;
+	width: 50vw;
+	height: 50vw;
+	max-width: 800px;
+	max-height: 800px;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+}
+
+.resultsImageDiv {
+	justify-content: space-between;
+	width: 50vw;
+	height: 50vw;
+	max-height: 800px;
+}
+
+.quizQuestionCaption,
+.resultTitle {
+	color: var(--light-color);
+	text-shadow: 2px 2px 3px var(--dark-color);
+}
+
+.resultTitle {
+	padding-top: 2rem;
+}
+
+.resultCaption {
+	color: var(--light-color);
+	text-shadow: 2px 2px 3px var(--dark-color);
+	padding-bottom: 2rem;
+	margin-bottom: 0;
+}
+
+@media only screen and (max-height: 1000px) {
+	.modal {
+		top: 5%;
+		bottom: 5%;
+		padding: 20px;
+	}
+
+	.closeModal {
+		top: 7%;
+	}
+}
+
+@media only screen and (max-width: 1000px) {
+	.modal {
+		left: 5%;
+		right: 5%;
+	}
+
+	.closeModal {
+		right: 7%;
+	}
+
+	.innerSliderDiv {
+		padding: 1rem 0;
+		margin: 4rem 0;
+	}
+	.questionImageDiv,
+	.resultsImageDiv {
+		width: 80vw;
+		height: 80vw;
+	}
+
+	.inputRow {
+		flex-direction: column;
+		margin: 0 -0.5rem;
+	}
+
+	.inputRow > input,
+	.inputRow > select {
+		width: 96%;
+		margin: 0.5rem 0;
+	}
+
+	.createFormButton {
+		margin: 0.5rem;
+	}
+}
+
+@media only screen and (max-width: 650px) {
+	.mainBody {
+		padding: 3rem 0;
+	}
+
+	.answersRow {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.innerSliderDiv {
+		padding: 1rem 0;
+		margin: 2rem 0;
+	}
+
+	.questionImageDiv,
+	.resultsImageDiv {
+		width: 100vw;
+		height: 100vw;
+	}
+
+	h2 {
+		padding: 0 2rem;
+	}
 }

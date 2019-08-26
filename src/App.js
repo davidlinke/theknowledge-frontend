@@ -99,15 +99,23 @@ class App extends React.Component {
 
 	async handleLogOut(event) {
 		this.setState({ currentUser: null });
-		const res = await axios.delete(`${baseURL}/sessions`, {});
+		await axios.delete(`${baseURL}/sessions`, {});
 	}
 
 	showCreateQuiz = () => {
-		this.setState({ createQuiz: true, showQuizzes: false });
+		this.setState({
+			createQuiz: true,
+			showQuizzes: false,
+			currentQuizId: null
+		});
 	};
 
 	hideCreateQuiz = () => {
-		this.setState({ createQuiz: false, showQuizzes: true });
+		this.setState({
+			createQuiz: false,
+			showQuizzes: true,
+			currentQuizId: null
+		});
 	};
 
 	takeAQuiz = id => {
@@ -132,7 +140,6 @@ class App extends React.Component {
 					<div className='account'>
 						{this.state.currentUser && (
 							<>
-								{/* <p>Current User: {this.state.currentUser}</p> */}
 								{!this.state.createQuiz && (
 									<button
 										className='headerButton headerButtonImportant'
@@ -190,31 +197,36 @@ class App extends React.Component {
 							</button>
 							<p>Create an account in order to make your own quizzes!</p>
 							<form onSubmit={this.handleCreateAccount}>
-								<input
-									type='email'
-									id='email'
-									name='email'
-									placeholder='email'
-									onChange={this.handleChange}
-									value={this.state.email}
-								/>
-								<input
-									type='password'
-									id='password'
-									name='password'
-									placeholder='password'
-									onChange={this.handleChange}
-									value={this.state.password}
-								/>
-								<input
-									type='text'
-									id='displayName'
-									name='displayName'
-									placeholder='display name'
-									onChange={this.handleChange}
-									value={this.state.displayName}
-								/>
-								<input type='submit' value='Create Account' />
+								<div className='modalInputRow'>
+									<input
+										type='email'
+										id='email'
+										name='email'
+										placeholder='email'
+										onChange={this.handleChange}
+										value={this.state.email}
+										required
+									/>
+									<input
+										type='password'
+										id='password'
+										name='password'
+										placeholder='password'
+										onChange={this.handleChange}
+										value={this.state.password}
+										required
+									/>
+									<input
+										type='text'
+										id='displayName'
+										name='displayName'
+										placeholder='display name'
+										onChange={this.handleChange}
+										value={this.state.displayName}
+										required
+									/>
+									<input type='submit' value='Create Account' />
+								</div>
 							</form>
 						</>
 					) : (
@@ -224,31 +236,40 @@ class App extends React.Component {
 								close
 							</button>
 							<form onSubmit={this.handleLogIn}>
-								<input
-									type='email'
-									id='email'
-									name='email'
-									placeholder='email'
-									onChange={this.handleChange}
-									value={this.state.email}
-								/>
-								<input
-									type='password'
-									id='password'
-									name='password'
-									placeholder='password'
-									onChange={this.handleChange}
-									value={this.state.password}
-								/>
-								<input type='submit' value='Log In' />
-								{this.state.invalidLogin && <p>Invalid Login, Try Again</p>}
+								<div className='modalInputRow'>
+									<input
+										type='email'
+										id='email'
+										name='email'
+										placeholder='email'
+										onChange={this.handleChange}
+										value={this.state.email}
+										required
+									/>
+									<input
+										type='password'
+										id='password'
+										name='password'
+										placeholder='password'
+										onChange={this.handleChange}
+										value={this.state.password}
+										required
+									/>
+									<input type='submit' value='Log In' />
+									{this.state.invalidLogin && <p>Invalid Login, Try Again</p>}
+								</div>
 							</form>
 						</>
 					)}
 				</Modal>
 				<div className='mainBodyParent'>
 					<div className='mainBody'>
-						{this.state.createQuiz && <CreateQuiz baseURL={baseURL} />}
+						{this.state.createQuiz && (
+							<CreateQuiz
+								baseURL={baseURL}
+								finishCreate={this.hideCreateQuiz}
+							/>
+						)}
 						{this.state.showQuizzes && (
 							<ShowAllQuizzes
 								baseURL={baseURL}
@@ -261,11 +282,40 @@ class App extends React.Component {
 							/>
 						)}
 						{this.state.currentQuizId && (
-							<TakeQuiz baseURL={baseURL} quizID={this.state.currentQuizId} />
+							<TakeQuiz
+								baseURL={baseURL}
+								quizID={this.state.currentQuizId}
+								stopQuiz={this.finishTakingQuiz}
+							/>
 						)}
-						<footer>Created by David &amp; the Peter's</footer>
 					</div>
 				</div>
+				<footer>
+					Created by{' '}
+					<a
+						href='https://github.com/peterfuoco'
+						target='_blank'
+						rel='noopener noreferrer'
+					>
+						Peter
+					</a>
+					,{' '}
+					<a
+						href='https://github.com/pdcoding'
+						target='_blank'
+						rel='noopener noreferrer'
+					>
+						Peter
+					</a>{' '}
+					&amp;{' '}
+					<a
+						href='https://github.com/davidlinke'
+						target='_blank'
+						rel='noopener noreferrer'
+					>
+						David
+					</a>
+				</footer>
 			</div>
 		);
 	}
