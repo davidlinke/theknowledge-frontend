@@ -22,11 +22,17 @@ class ShowAllQuizzes extends React.Component {
 
 	async deleteAQuiz (id) {
 		const baseURL = this.props.baseURL;
-		await axios.delete(`${baseURL}/quizzes/${id}`);
+		await axios.delete(`${baseURL}/quizzes/${id}`, );
 		console.log('click');
 		this.getQuizzes();
 
 	}
+
+	// async showAQuiz (id) {
+	// 	const baseURL = this.props.baseURL;
+	// 	console.log('click');
+	// 	this.getQuizzes();
+	// }
 
 	componentDidMount() {
 		this.getQuizzes();
@@ -54,6 +60,7 @@ class ShowAllQuizzes extends React.Component {
 							   </button>
 								: null
 							}
+							<p>Show count here</p>
 							
 						</div>
 					);

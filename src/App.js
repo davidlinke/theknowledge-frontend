@@ -257,6 +257,7 @@ class App extends React.Component {
 								stopQuiz={this.finishTakingQuiz}
 								quizzes={this.state.quizzes}
 								currentUser={this.state.currentUser}
+								showQuiz={this.state.showQuizzes}
 							/>
 						)}
 						{this.state.currentQuizId && (
