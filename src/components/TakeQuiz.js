@@ -29,7 +29,6 @@ class TakeQuiz extends React.Component {
 			`${this.props.baseURL}/quizzes/${this.props.quizID}`
 		);
 		const data = response.data;
-		// console.log(data);
 		this.setState({
 			quiz: data
 		});
@@ -98,12 +97,6 @@ class TakeQuiz extends React.Component {
 		if (resultPosition === -1) {
 			return <></>;
 		} else {
-			// console.log('Result Position ' + resultPosition);
-			// console.log(this.state.quiz.results[resultPosition].result);
-			// console.log(this.state.resultsCount);
-			// console.log(this.state.quiz.results[resultPosition].resultImage);
-			// console.log(this.state.quiz.results[resultPosition].resultImage.length);
-
 			const resultContent = [];
 			resultContent.push(
 				<h2 className='resultTitle' key='resultTitle'>

@@ -21,6 +21,7 @@ class App extends React.Component {
 			displayName: '',
 			currentUser: Cookies.get('userid') || null,
 			invalidLogin: false,
+			invalidAccountEmailSignUp: false,
 			createQuiz: false,
 			showQuizzes: true,
 			currentQuizId: null,
@@ -47,6 +48,7 @@ class App extends React.Component {
 		this.setState({
 			modalIsOpen: false,
 			invalidLogin: false,
+			invalidAccountEmailSignUp: false,
 			email: '',
 			password: '',
 			displayName: ''
@@ -60,18 +62,25 @@ class App extends React.Component {
 	async handleCreateAccount(event) {
 		event.preventDefault();
 
-		await axios.post(`${baseURL}/users`, {
+		const response = await axios.post(`${baseURL}/users`, {
 			email: this.state.email,
 			password: this.state.password,
 			displayName: this.state.displayName
 		});
 
-		this.setState({
-			email: '',
-			password: '',
-			displayName: '',
-			modalIsOpen: false
-		});
+		if (response.data === 'user email already exists') {
+			this.setState({
+				invalidAccountEmailSignUp: true
+			});
+		} else {
+			this.setState({
+				email: '',
+				password: '',
+				displayName: '',
+				modalIsOpen: false,
+				invalidAccountEmailSignUp: false
+			});
+		}
 	}
 
 	async handleLogIn(event) {
@@ -226,6 +235,9 @@ class App extends React.Component {
 										required
 									/>
 									<input type='submit' value='Create Account' />
+									{this.state.invalidAccountEmailSignUp && (
+										<p>Email address already in use, try logging in with it.</p>
+									)}
 								</div>
 							</form>
 						</>
