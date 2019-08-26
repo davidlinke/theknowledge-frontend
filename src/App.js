@@ -8,7 +8,7 @@ import TakeQuiz from './components/TakeQuiz.js';
 require('dotenv').config();
 axios.defaults.withCredentials = true;
 
-let baseURL = 'https://theknowledge.herokuapp.com/';
+let baseURL = 'https://theknowledge.herokuapp.com';
 
 if (process.env.NODE_ENV === 'development') {
 	baseURL = 'http://localhost:3003';
