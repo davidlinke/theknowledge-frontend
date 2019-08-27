@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import CreateQuiz from './components/CreateQuiz.js';
 import ShowAllQuizzes from './components/ShowAllQuizzes.js';
 import TakeQuiz from './components/TakeQuiz.js';
+import Seed from './components/Seed.js';
 require('dotenv').config();
 axios.defaults.withCredentials = true;
 
@@ -24,7 +25,7 @@ class App extends React.Component {
 			email: '',
 			password: '',
 			displayName: '',
-			currentUser: Cookies.get('userid') || null,
+			currentUser: Cookies.get('user') || null,
 			invalidLogin: false,
 			invalidAccountEmailSignUp: false,
 			createQuiz: false,
@@ -332,6 +333,8 @@ class App extends React.Component {
 						David
 					</a>
 				</footer>
+				{this.state.currentUser === 'a@a.com' && <Seed baseURL={baseURL} />}
+				{/* <Seed baseURL={baseURL} /> */}
 			</div>
 		);
 	}
