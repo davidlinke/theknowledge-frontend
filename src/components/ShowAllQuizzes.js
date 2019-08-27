@@ -91,7 +91,7 @@ class ShowAllQuizzes extends React.Component {
 									></div>
 								</div>
 
-								{this.props.currentUser === quiz.createdBy ? (
+								{this.props.currentUserID === quiz.createdBy ? (
 									<button
 										className='quizCardButton quizCardButtonDelete'
 										onClick={() => this.deleteAQuiz(quiz.id)}

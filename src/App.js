@@ -26,6 +26,7 @@ class App extends React.Component {
 			password: '',
 			displayName: '',
 			currentUser: Cookies.get('user') || null,
+			currentUserID: Cookies.get('userid'),
 			invalidLogin: false,
 			invalidAccountEmailSignUp: false,
 			createQuiz: false,
@@ -97,6 +98,8 @@ class App extends React.Component {
 			password: this.state.password
 		});
 
+		console.log(response);
+
 		if (response.data === 'wrong username or password') {
 			this.setState({
 				invalidLogin: true
@@ -106,6 +109,7 @@ class App extends React.Component {
 				email: '',
 				password: '',
 				currentUser: Cookies.get('user'),
+				currentUserID: Cookies.get('userid'),
 				modalIsOpen: false,
 				invalidLogin: false
 			});
@@ -113,7 +117,7 @@ class App extends React.Component {
 	}
 
 	async handleLogOut(event) {
-		this.setState({ currentUser: null });
+		this.setState({ currentUser: null, currentUserID: null });
 		await axios.delete(`${baseURL}/sessions`, {});
 	}
 
@@ -295,7 +299,7 @@ class App extends React.Component {
 								deleteQuiz={this.deleteAQuiz}
 								stopQuiz={this.finishTakingQuiz}
 								quizzes={this.state.quizzes}
-								currentUser={this.state.currentUser}
+								currentUserID={this.state.currentUserID}
 							/>
 						)}
 						{this.state.currentQuizId && (
