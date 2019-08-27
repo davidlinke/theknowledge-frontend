@@ -533,6 +533,11 @@ select {
 	margin-bottom: 0;
 }
 
+.center {
+	text-align: center;
+	margin: 2rem 0;
+}
+
 @media only screen and (max-height: 1000px) {
 	.modal {
 		top: 5%;
