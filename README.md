@@ -1,9 +1,10 @@
-#The Knowledge
-###An app for making and taking fun quizzes!
+# The Knowledge
 
-####[Live Site](http://theknowledge.surge.sh)
+### An app for making and taking fun quizzes!
 
-#####Created by [David Linke](https://github.com/davidlinke), [Peter Fuoco](https://github.com/peterfuoco), and [Peter Dillenschneider](https://github.com/pdcoding)
+#### [Live Site](http://theknowledge.surge.sh)
+
+##### Created by [David Linke](https://github.com/davidlinke), [Peter Fuoco](https://github.com/peterfuoco), and [Peter Dillenschneider](https://github.com/pdcoding)
 
 **NOTE: This is the frontend component of this site, the backend component can be found [here](https://github.com/pdcoding/theknowledge-backend).**
 
