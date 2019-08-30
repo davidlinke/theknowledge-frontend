@@ -35,7 +35,11 @@ class ShowAllQuizzes extends React.Component {
 
 	async deleteAQuiz(id) {
 		const baseURL = this.props.baseURL;
-		await axios.delete(`${baseURL}/quizzes/${id}`);
+		await axios.delete(`${baseURL}/quizzes/${id}`, {
+			headers: {
+				userid: this.props.userID
+			}
+		});
 		this.getQuizzes();
 	}
 
