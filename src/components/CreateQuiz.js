@@ -32,13 +32,23 @@ class CreateQuiz extends React.Component {
 	async handleSubmit(event) {
 		event.preventDefault();
 
-		await axios.post(`${this.props.baseURL}/quizzes`, {
-			name: this.state.quizName,
-			caption: this.state.quizCaption,
-			image: this.state.quizImage,
-			questions: this.state.questions,
-			results: this.state.results
-		});
+		const response = await axios.post(
+			`${this.props.baseURL}/quizzes`,
+			{
+				name: this.state.quizName,
+				caption: this.state.quizCaption,
+				image: this.state.quizImage,
+				questions: this.state.questions,
+				results: this.state.results
+			},
+			{
+				headers: {
+					userid: this.props.userID
+				}
+			}
+		);
+
+		console.log(response);
 
 		this.props.finishCreate();
 	}

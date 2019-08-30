@@ -1,13 +1,13 @@
 import React from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import CreateQuiz from './components/CreateQuiz.js';
 import ShowAllQuizzes from './components/ShowAllQuizzes.js';
 import TakeQuiz from './components/TakeQuiz.js';
 import Seed from './components/Seed.js';
 require('dotenv').config();
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 let baseURL = 'https://theknowledge.herokuapp.com';
 
@@ -25,8 +25,8 @@ class App extends React.Component {
 			email: '',
 			password: '',
 			displayName: '',
-			currentUser: Cookies.get('user') || null,
-			currentUserID: Cookies.get('userid'),
+			currentUser: localStorage.getItem('user'),
+			currentUserID: localStorage.getItem('userid'),
 			invalidLogin: false,
 			invalidAccountEmailSignUp: false,
 			createQuiz: false,
@@ -108,17 +108,27 @@ class App extends React.Component {
 			this.setState({
 				email: '',
 				password: '',
-				currentUser: Cookies.get('user'),
-				currentUserID: Cookies.get('userid'),
+				// currentUser: Cookies.get('user'),
+				// currentUserID: Cookies.get('userid'),
+				currentUser: response.data.user,
+				currentUserID: response.data.userid,
 				modalIsOpen: false,
 				invalidLogin: false
 			});
+			localStorage.setItem('user', response.data.user);
+			localStorage.setItem('userid', response.data.userid);
+			localStorage.setItem('sessionid', response.data.sessionid);
 		}
 	}
 
 	async handleLogOut(event) {
-		this.setState({ currentUser: null, currentUserID: null });
 		await axios.delete(`${baseURL}/sessions`, {});
+
+		// IF LOGGED OUT
+		this.setState({ currentUser: null, currentUserID: null });
+		localStorage.removeItem('userid');
+		localStorage.removeItem('user');
+		localStorage.removeItem('sessionid');
 	}
 
 	showCreateQuiz = () => {
@@ -290,6 +300,7 @@ class App extends React.Component {
 							<CreateQuiz
 								baseURL={baseURL}
 								finishCreate={this.hideCreateQuiz}
+								userID={this.state.currentUserID}
 							/>
 						)}
 						{this.state.showQuizzes && (
